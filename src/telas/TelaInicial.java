@@ -7,6 +7,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TelaInicial {
 
@@ -60,11 +63,17 @@ public class TelaInicial {
 		frame.getContentPane().add(jogador2);
 		
 		JButton btnJogar = new JButton("Jogar");
-		btnJogar.setBackground(Color.BLACK);
+		btnJogar.setBackground(SystemColor.menu);
 		btnJogar.setForeground(Color.BLACK);
 		btnJogar.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnJogar.setBounds(289, 396, 164, 46);
 		frame.getContentPane().add(btnJogar);
+		btnJogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				TelaJogo.main(null);
+			}
+		});
 		
 		JLabel tela = new JLabel("");
 		tela.setBounds(-4, 0, 750, 500);
