@@ -1,3 +1,4 @@
+package pecas;
 
 public class Torre extends Objeto {
 

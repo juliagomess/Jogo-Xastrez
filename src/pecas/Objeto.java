@@ -1,3 +1,4 @@
+package pecas;
 
 public abstract class Objeto {
 	private String nome;
