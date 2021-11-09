@@ -1,8 +1,15 @@
 package pecas;
 
-public class Rei {
+import telas.Lugar;
+
+public class Rei extends Objeto {
 	
 	private int flagMovimento;
+	
+	public Rei(int cor) {
+		this.setNome("Rei");
+		this.setCor(cor);
+	}
 	
 	public int getFlagMovimento() {
 		return flagMovimento;
@@ -16,19 +23,20 @@ public class Rei {
 		
 	}
 	
-	void movimento(int jogador) {
-		if(jogador == 1) {
-			
-		} else {
-			
-		}
-	}
-
-	void comer(int jogador) {
-		if(jogador == 1) {
-			
-		} else {
-			
-		}
+	void movimento(Lugar[][] tabuleiro,int jogador, int x, int y) {
+		if(
+			(this.getY()-1 == y || this.getY()+1 == y && this.getX() == x) || 
+			(this.getY() == y && this.getX()-1 == x || this.getX()+1 == x) || 
+			(this.getY()-1== y || this.getY()+1== y && this.getX()-1 == x || this.getX()+1 == x)
+		  ) {
+			if(!tabuleiro[y][x].getVazio()) {
+				if(tabuleiro[y][x].getPeca()!=this.getCor()) {
+					//tira peça q tava
+				} else {
+					this.setY(y);
+					this.setX(x);
+				}	
+			}
+		} 	
 	}
 }
