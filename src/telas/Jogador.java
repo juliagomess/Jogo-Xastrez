@@ -19,35 +19,33 @@ public class Jogador {
 		this.cor=cor;
 		this.setFlagPrimJog(0);
 		
-		int oito=80;
 		for(int i=0;i<8;i++) {
 			Peao peao = new Peao(cor,this);
-			peao.setX(oito);
+			peao.setX(i);
 			if(cor==1) {
-				peao.setY(722);
+				peao.setY(1);
 			} else {
-				peao.setY(322);
+				peao.setY(6);
 			}
 			this.pecas.add(peao);
-			oito += 80;
 		}
 		
 		for(int i=0;i<2;i++) {
 			Torre torre = new Torre(cor);
 			if(i==0) {
-				torre.setX(80);
+				torre.setX(0);
 				if(cor==1) {
-					torre.setY(802);
+					torre.setY(0);
 				} else {
-					torre.setY(242);
+					torre.setY(7);
 				}
 				
 			} else {
-				torre.setX(640);
+				torre.setX(7);
 				if(cor==1) {
-					torre.setY(802);
+					torre.setY(0);
 				} else {
-					torre.setY(242);
+					torre.setY(7);
 				}
 			}
 			this.pecas.add(torre);
@@ -56,19 +54,19 @@ public class Jogador {
 		for(int i=0;i<2;i++) {
 			Cavalo cavalo = new Cavalo(cor);
 			if(i==0) {
-				cavalo.setX(160);
+				cavalo.setX(1);
 				if(cor==1) {
-					cavalo.setY(802);
+					cavalo.setY(0);
 				} else {
-					cavalo.setY(242);
+					cavalo.setY(7);
 				}
 				
 			} else {
-				cavalo.setX(560);
+				cavalo.setX(6);
 				if(cor==1) {
-					cavalo.setY(802);
+					cavalo.setY(0);
 				} else {
-					cavalo.setY(242);
+					cavalo.setY(7);
 				}
 			}
 			this.pecas.add(cavalo);
@@ -77,39 +75,39 @@ public class Jogador {
 		for(int i=0;i<2;i++) {
 			Bispo bispo = new Bispo(cor);
 			if(i==0) {
-				bispo.setX(240);
+				bispo.setX(2);
 				if(cor==1) {
-					bispo.setY(802);
+					bispo.setY(0);
 				} else {
-					bispo.setY(242);
+					bispo.setY(7);
 				}
 				
 			} else {
-				bispo.setX(480);
+				bispo.setX(5);
 				if(cor==1) {
-					bispo.setY(802);
+					bispo.setY(0);
 				} else {
-					bispo.setY(242);
+					bispo.setY(7);
 				}
 			}
 			this.pecas.add(bispo);
 		}
 		
 		Dama dama = new Dama(cor);
-		dama.setX(320);
+		dama.setX(3);
 		if(cor==1) {
-			dama.setY(802);
+			dama.setY(0);
 		} else {
-			dama.setY(242);
+			dama.setY(7);
 		}
 		this.pecas.add(dama);
 		
 		Rei rei = new Rei(cor);
-		rei.setX(400);
+		rei.setX(4);
 		if(cor==1) {
-			rei.setY(802);
+			rei.setY(0);
 		} else {
-			rei.setY(242);
+			rei.setY(7);
 		}
 		this.pecas.add(rei);
 	}

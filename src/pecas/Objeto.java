@@ -40,5 +40,13 @@ public abstract class Objeto {
 		this.nome = nome;
 	}
 	
+	public int getPosTabX() {
+		return 80*this.getX()+80;
+	}
+	
+	public int getPosTabY() {
+		return 802-this.getY()*80;
+	}
+	
 	abstract void movimento(Lugar[][] tabuleiro, int jogador, int x, int y);
 }
