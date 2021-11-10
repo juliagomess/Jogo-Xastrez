@@ -9,6 +9,7 @@ public class Rei extends Objeto {
 	public Rei(int cor) {
 		this.setNome("Rei");
 		this.setCor(cor);
+		this.setFlagMovimento(0);
 	}
 	
 	public int getFlagMovimento() {
@@ -18,10 +19,6 @@ public class Rei extends Objeto {
 	public void setFlagMovimento(int flag) {
 		this.flagMovimento = flag;
 	}
-
-	void roque() {
-		
-	}
 	
 	void movimento(Lugar[][] tabuleiro,int jogador, int x, int y) {
 		if(
@@ -30,7 +27,7 @@ public class Rei extends Objeto {
 			(this.getY()-1== y || this.getY()+1== y && this.getX()-1 == x || this.getX()+1 == x)
 		  ) {
 			if(!tabuleiro[y][x].getVazio()) {
-				if(tabuleiro[y][x].getPeca()!=this.getCor()) {
+				if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
 					//tira peça q tava
 				} else {
 					this.setY(y);
@@ -38,5 +35,9 @@ public class Rei extends Objeto {
 				}	
 			}
 		} 	
+	}
+	
+	void roque() {
+		
 	}
 }

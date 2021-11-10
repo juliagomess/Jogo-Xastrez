@@ -1,45 +1,33 @@
 package pecas;
-
+import telas.Jogador;
 import telas.Lugar;
 
 public class Peao extends Objeto {
 	
-	private int flagPrim;
-	
-	public int getFlagPrim() {
-		return flagPrim;
-	}
+	private Jogador jogador;
 
-	public void setFlagPrim(int flagPrim) {
-		this.flagPrim = flagPrim;
-	}
-
-	public Peao(int cor) {
+	public Peao(int cor,Jogador j) {
 		this.setNome("Peão");
 		this.setCor(cor);
-		this.setFlagPrim(0);
+		this.setJogador(j);
+	}
+	
+	public Jogador getJogador() {
+		return jogador;
 	}
 
-	public void transforma(int jogador, int x, int y) {
-		if(jogador == 1) {
-			if(y==7) {
-				//transforma
-			}
-		} else {
-			if(y==0) {
-				//transforma
-			}
-		}
+	public void setJogador(Jogador jogador) {
+		this.jogador = jogador;
 	}
  
 	public void movimento(Lugar[][] tabuleiro, int jogador, int x, int y) {
 		if(tabuleiro[y][x].getVazio()) {
 			
 			if(jogador == 1) {
-				if(this.getFlagPrim()==0) {
+				if(this.jogador.getFlagPrimJog()==0) {
 					if(this.getY()-2 == y || this.getY()-1 == y && this.getX() == x) {
 						this.setY(y);
-						this.setFlagPrim(1);
+						this.jogador.setFlagPrimJog(1);
 					}
 				} else {
 					if(this.getY()-1 == y && this.getX() == x) {
@@ -48,10 +36,10 @@ public class Peao extends Objeto {
 				}
 				
 			} else {
-				if(this.getFlagPrim()==0) {
+				if(this.jogador.getFlagPrimJog()==0) {
 					if(this.getY()+2 == y || this.getY()+1 == y && this.getX() == x) {
 						this.setY(y);
-						this.setFlagPrim(1);
+						this.jogador.setFlagPrimJog(1);
 					}
 				} else {
 					if(this.getY()+1 == y && this.getX() == x) {
@@ -63,8 +51,8 @@ public class Peao extends Objeto {
 		}
 	}
 	
-	public void comer(Lugar[][] tabuleiro, int jogador, int x, int y) {
-		if(!tabuleiro[y][x].getVazio() && tabuleiro[y][x].getPeca()!=this.getCor()) {
+	public void captura(Lugar[][] tabuleiro, int jogador, int x, int y) {
+		if(!tabuleiro[y][x].getVazio() && tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
 			if(jogador == 1) {
 				if(this.getY()-1 == y && this.getX()+1 == x || this.getX()-1 == x) {
 					this.setX(x);
@@ -77,6 +65,17 @@ public class Peao extends Objeto {
 				}
 			}
 		}
-		
+	}
+	
+	public void transforma(int jogador, int x, int y) {
+		if(jogador == 1) {
+			if(y==7) {
+				//transforma
+			}
+		} else {
+			if(y==0) {
+				//transforma
+			}
+		}
 	}
 }

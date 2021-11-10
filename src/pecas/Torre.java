@@ -9,6 +9,7 @@ public class Torre extends Objeto {
 	public Torre(int cor) {
 		this.setNome("Torre");
 		this.setCor(cor);
+		this.setFlagMovimento(0);
 	}
 
 	public int getFlagMovimento() {
