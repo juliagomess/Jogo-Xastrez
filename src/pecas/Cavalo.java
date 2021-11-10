@@ -1,5 +1,7 @@
 package pecas;
 
+import javax.swing.JLabel;
+
 import telas.Lugar;
 
 public class Cavalo extends Objeto{
@@ -9,7 +11,7 @@ public class Cavalo extends Objeto{
 		this.setCor(cor);
 	}
 
-	void movimento(Lugar[][] tabuleiro, int jogador, int x, int y) {
+	public void movimento(Lugar[][] tabuleiro, int x, int y) {
 		int xOffset=Math.abs(this.getX()-x);
 		int yOffset=Math.abs(this.getY()-y);
 		
@@ -25,5 +27,11 @@ public class Cavalo extends Objeto{
 		}
 		
 //		return false;
+	}
+
+	@Override
+	public JLabel movimentosPossiveis() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

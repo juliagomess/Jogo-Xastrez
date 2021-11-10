@@ -1,5 +1,7 @@
 package telas;
 import java.awt.EventQueue;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,6 +10,8 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaJogo {
 
@@ -266,6 +270,21 @@ public class TelaJogo {
 		tb2.setIcon(tb);
 		
 		JLabel fundo = new JLabel("");
+		fundo.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				
+				int x=e.getX();
+				int y=e.getY();
+				
+				System.out.print("\n");
+				System.out.print(x);
+				System.out.print("\n");
+				System.out.print(y);
+				System.out.print("\n");
+				
+				
+			}
+		});
 		fundo.setBounds(0, 0, 1034, 961);
 		frame.getContentPane().add(fundo);
 		fundo.setIcon(J1);

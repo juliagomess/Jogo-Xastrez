@@ -1,5 +1,7 @@
 package pecas;
 
+import javax.swing.JLabel;
+
 import telas.Lugar;
 
 public abstract class Objeto {
@@ -40,13 +42,27 @@ public abstract class Objeto {
 		this.nome = nome;
 	}
 	
-	public int getPosTabX() {
-		return 80*this.getX()+80;
+	public int getPosTabX(int posicao) {
+		if(posicao == -1)
+			return 80*this.getX()+80;
+		return 80*posicao+80;
 	}
 	
-	public int getPosTabY() {
-		return 802-this.getY()*80;
+	public int getPosTabY(int posicao) {
+		if(posicao == -1)
+			return 802-this.getY()*80;
+		return 802-posicao*80;
 	}
 	
-	abstract void movimento(Lugar[][] tabuleiro, int jogador, int x, int y);
+	public int convertePosTabX(int posicao) {
+		return (posicao-80)/80;
+	}
+	
+	public int convertePosTabY(int posicao) {
+		return (802-posicao)/80;
+	}
+	
+	public abstract void movimento(Lugar[][] tabuleiro, int x, int y);
+	
+	public abstract JLabel movimentosPossiveis();
 }

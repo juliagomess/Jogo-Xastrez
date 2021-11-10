@@ -1,4 +1,10 @@
 package pecas;
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 import telas.Jogador;
 import telas.Lugar;
 
@@ -20,10 +26,10 @@ public class Peao extends Objeto {
 		this.jogador = jogador;
 	}
  
-	public void movimento(Lugar[][] tabuleiro, int jogador, int x, int y) {
+	public void movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(tabuleiro[y][x].getVazio()) {
 			
-			if(jogador == 1) {
+			if(this.getCor() == 1) {
 				if(this.jogador.getFlagPrimJog()==0) {
 					if(this.getY()-2 == y || this.getY()-1 == y && this.getX() == x) {
 						this.setY(y);
@@ -49,6 +55,23 @@ public class Peao extends Objeto {
 			}
 			
 		}
+	}
+	
+	public JLabel movimentosPossiveis() {
+//		if(this.jogador.getFlagPrimJog()==0) {
+			
+			int px=this.getPosTabX(-1);
+			int py=this.getY();
+			
+			py+=2;
+			py=this.getPosTabY(py);
+			
+			JLabel p = new JLabel("AQUI");
+			p.setHorizontalAlignment(SwingConstants.CENTER);
+			p.setBounds(px, py, 80, 80);
+			p.setBorder(BorderFactory.createLineBorder(Color.RED));
+			return p;
+//		}
 	}
 	
 	public void captura(Lugar[][] tabuleiro, int jogador, int x, int y) {

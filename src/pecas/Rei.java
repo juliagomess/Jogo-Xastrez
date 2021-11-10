@@ -1,5 +1,7 @@
 package pecas;
 
+import javax.swing.JLabel;
+
 import telas.Lugar;
 
 public class Rei extends Objeto {
@@ -20,7 +22,7 @@ public class Rei extends Objeto {
 		this.flagMovimento = flag;
 	}
 	
-	void movimento(Lugar[][] tabuleiro,int jogador, int x, int y) {
+	public void movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(
 			(this.getY()-1 == y || this.getY()+1 == y && this.getX() == x) || 
 			(this.getY() == y && this.getX()-1 == x || this.getX()+1 == x) || 
@@ -39,5 +41,11 @@ public class Rei extends Objeto {
 	
 	void roque() {
 		
+	}
+
+	@Override
+	public JLabel movimentosPossiveis() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

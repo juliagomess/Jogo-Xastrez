@@ -1,4 +1,6 @@
 package telas;
+import javax.swing.JLabel;
+
 import pecas.Objeto;
 
 public class Main {
@@ -30,19 +32,23 @@ public class Main {
 		}			
 	}
 	
+	public static JLabel possibilidades(int index) {
+		return j1.getPecas().get(index).movimentosPossiveis();
+	}
+	
 	public static int getX(int cor,int index) {
 		if(cor==1) {
-			return j1.getPecas().get(index).getPosTabX();
+			return j1.getPecas().get(index).getPosTabX(-1);
 		} else {
-			return j2.getPecas().get(index).getPosTabX();
+			return j2.getPecas().get(index).getPosTabX(-1);
 		}
 	}
 	
 	public static int getY(int cor,int index) {
 		if(cor==1) {
-			return j1.getPecas().get(index).getPosTabY();
+			return j1.getPecas().get(index).getPosTabY(-1);
 		} else {
-			return j2.getPecas().get(index).getPosTabY();
+			return j2.getPecas().get(index).getPosTabY(-1);
 		}
 	}
 
