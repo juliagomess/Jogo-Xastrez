@@ -1,70 +1,94 @@
 package pecas;
+import java.awt.Color;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import telas.Jogador;
 import telas.Lugar;
 
 public class Peao extends Objeto {
 	
-	private int flagPrim;
-	
-	public int getFlagPrim() {
-		return flagPrim;
-	}
+	private Jogador jogador;
 
-	public void setFlagPrim(int flagPrim) {
-		this.flagPrim = flagPrim;
-	}
-
-	public Peao(int cor) {
+	public Peao(int cor,Jogador j) {
 		this.setNome("Peão");
 		this.setCor(cor);
-		this.setFlagPrim(0);
+		this.setJogador(j);
+		this.setCapturada(false);
+	}
+	
+	public Jogador getJogador() {
+		return jogador;
 	}
 
-	public void transforma(int jogador, int x, int y) {
-		if(jogador == 1) {
-			if(y==7) {
-				//transforma
-			}
-		} else {
-			if(y==0) {
-				//transforma
-			}
-		}
+	public void setJogador(Jogador jogador) {
+		this.jogador = jogador;
 	}
  
-	public void movimento(Lugar[][] tabuleiro, int jogador, int x, int y) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(tabuleiro[y][x].getVazio()) {
-			
-			if(jogador == 1) {
-				if(this.getFlagPrim()==0) {
-					if(this.getY()-2 == y || this.getY()-1 == y && this.getX() == x) {
+			if(this.getCor() == 0) {
+				if(this.jogador.getFlagPrimJog()==0) {
+					System.out.print(this.getX() + " " + this.getY() + " " + this.getCor());
+					if((this.getY()-2 == y || this.getY()-1 == y) && this.getX() == x) {
+						System.out.print("\nDDDDDDD\n");
 						this.setY(y);
-						this.setFlagPrim(1);
+						this.jogador.setFlagPrimJog(1);
+						return true;
 					}
+					return false;
 				} else {
 					if(this.getY()-1 == y && this.getX() == x) {
 						this.setY(y);
+						return true;
 					}
+					return false;
 				}
 				
 			} else {
-				if(this.getFlagPrim()==0) {
-					if(this.getY()+2 == y || this.getY()+1 == y && this.getX() == x) {
+				if(this.jogador.getFlagPrimJog()==0) {
+					System.out.print(this.getX() + " " + this.getY()+ " " + this.getCor());
+					if((this.getY()+2 == y || this.getY()+1 == y) && this.getX() == x) {
+						System.out.print("\nDDDDDDDDDD222222222222\n");
 						this.setY(y);
-						this.setFlagPrim(1);
+						this.jogador.setFlagPrimJog(1);
+						return true;
 					}
+					return false;
 				} else {
 					if(this.getY()+1 == y && this.getX() == x) {
 						this.setY(y);
+						return true;
 					}
+					return false;
 				}
 			}
 			
 		}
+		return false;
 	}
 	
-	public void comer(Lugar[][] tabuleiro, int jogador, int x, int y) {
-		if(!tabuleiro[y][x].getVazio() && tabuleiro[y][x].getPeca()!=this.getCor()) {
+	public JLabel movimentosPossiveis() {
+//		if(this.jogador.getFlagPrimJog()==0) {
+			
+			int px=this.getPosTabX(-1);
+			int py=this.getY();
+			
+			py+=2;
+			py=this.getPosTabY(py);
+			
+			JLabel p = new JLabel("AQUI");
+			p.setHorizontalAlignment(SwingConstants.CENTER);
+			p.setBounds(px, py, 80, 80);
+			p.setBorder(BorderFactory.createLineBorder(Color.RED));
+			return p;
+//		}
+	}
+	
+	public void captura(Lugar[][] tabuleiro, int jogador, int x, int y) {
+		if(!tabuleiro[y][x].getVazio() && tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
 			if(jogador == 1) {
 				if(this.getY()-1 == y && this.getX()+1 == x || this.getX()-1 == x) {
 					this.setX(x);
@@ -77,6 +101,17 @@ public class Peao extends Objeto {
 				}
 			}
 		}
-		
+	}
+	
+	public void transforma(int jogador, int x, int y) {
+		if(jogador == 1) {
+			if(y==7) {
+				//transforma
+			}
+		} else {
+			if(y==0) {
+				//transforma
+			}
+		}
 	}
 }

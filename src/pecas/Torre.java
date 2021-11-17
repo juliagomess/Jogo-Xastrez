@@ -1,5 +1,7 @@
 package pecas;
 
+import javax.swing.JLabel;
+
 import telas.Lugar;
 
 public class Torre extends Objeto {
@@ -9,6 +11,8 @@ public class Torre extends Objeto {
 	public Torre(int cor) {
 		this.setNome("Torre");
 		this.setCor(cor);
+		this.setFlagMovimento(0);
+		this.setCapturada(false);
 	}
 
 	public int getFlagMovimento() {
@@ -19,11 +23,18 @@ public class Torre extends Objeto {
 		this.flagMovimento = flag;
 	}
 
-	void movimento(Lugar[][] tabuleiro, int jogador, int x, int y) {
-		if(jogador == 1) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
+		if(this.getCor() == 1) {
 			
 		} else {
 			
 		}
+		return false;
+	}
+
+	@Override
+	public JLabel movimentosPossiveis() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

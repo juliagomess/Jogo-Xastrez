@@ -1,23 +1,24 @@
 package telas;
+import pecas.Objeto;
 
 public class Lugar {
 	private boolean vazio;
-	private int peca;
+	private Objeto peca;
 	
 	public Lugar() {
 		this.vazio=true;
 	}
 	
-	public void colocaPeca(int jogador) {
+	public void colocaPeca(Objeto peca) {
 		this.vazio=false;
-		this.peca=jogador;
+		this.peca=peca;
 	}
 	
 	public boolean getVazio() {
 		return this.vazio;
 	}
 	
-	public int getPeca() {
+	public Objeto getPeca() {
 		return this.peca;
 	}
 }

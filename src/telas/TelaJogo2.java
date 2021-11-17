@@ -1,21 +1,23 @@
 package telas;
-import java.awt.EventQueue;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.Font;
+
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
 
-public class TelaJogo {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+public class TelaJogo2 {
 
 	private JFrame frame;
-	ImageIcon J1 = new ImageIcon(getClass().getResource("../imagens/fundoJ1.png"));
+	ImageIcon J2 = new ImageIcon(getClass().getResource("../imagens/fundoJ2.png"));
 	ImageIcon pp = new ImageIcon(getClass().getResource("../imagens/peaop.png"));
 	ImageIcon pb = new ImageIcon(getClass().getResource("../imagens/peaob.png"));
 	ImageIcon tp = new ImageIcon(getClass().getResource("../imagens/torrep.png"));
@@ -36,7 +38,7 @@ public class TelaJogo {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaJogo window = new TelaJogo();
+					TelaJogo2 window = new TelaJogo2();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +50,7 @@ public class TelaJogo {
 	/**
 	 * Create the application.
 	 */
-	public TelaJogo() {
+	public TelaJogo2() {
 		initialize();
 	}
 
@@ -270,7 +272,7 @@ public class TelaJogo {
 		JLabel fundo = new JLabel("");
 		fundo.setBounds(0, 0, 1034, 961);
 		frame.getContentPane().add(fundo);
-		fundo.setIcon(J1);
+		fundo.setIcon(J2);
 		
 		JPanel panel = new JPanel();
 		panel.addMouseListener(new MouseAdapter() {
@@ -283,7 +285,6 @@ public class TelaJogo {
 					//move ela
 					flag = 0;
 				}
-				
 				int x=e.getX()/80;
 				int y=e.getY()/80;
 				
@@ -293,12 +294,11 @@ public class TelaJogo {
 				System.out.print(y);
 				System.out.print("\n");
 				
-				Main.movimentoPeca(0, 0, x, y);
-//				frame.setVisible(false);
-//				TelaJogo2.main(null);
+				Main.movimentoPeca(0, 0, x, y);		
 			}
 		});
 		panel.setBounds(80, 240, 640, 640);
 		frame.getContentPane().add(panel);
 	}
+
 }
