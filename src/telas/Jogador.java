@@ -132,7 +132,16 @@ public class Jogador {
 		this.nome = nome;
 	}
 	
-	public ArrayList<Objeto> getPecas(){
+	public ArrayList<Objeto> getPecas() {
 		return this.pecas;
+	}
+	
+	public boolean procuraPeca(Lugar[][] tabuleiro, int x, int y) {
+		for(Objeto p : this.getPecas())
+			if(p.getX()==x && p.getY()==y) {
+				p.movimento(tabuleiro, x, y);
+				return true;
+			}		
+		return false;
 	}
 }
