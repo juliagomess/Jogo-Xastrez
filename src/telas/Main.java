@@ -1,8 +1,6 @@
 package telas;
 import javax.swing.JLabel;
 
-import pecas.Objeto;
-
 public class Main {
 	
 	private static Jogador j1 = new Jogador(0); //branco
@@ -11,7 +9,7 @@ public class Main {
 	
 	public static void setJogadores(String nome1, String nome2) {
 		j1.setNome(nome1);
-		j2.setNome(nome2);
+		j2.setNome(nome2); 
 		
 		for(int i=0;i<8;i++)
 			for(int j=0;j<8;j++)
@@ -52,20 +50,19 @@ public class Main {
 		}
 	}
 	
-	public static boolean movimentoPeca(int cor,int index,int x, int y) {
+	public static boolean movimentoPeca(int cor,int x, int y) {
 		if(cor==0) {
-			System.out.print(j1.getPecas().get(index).getNome());
-			return j1.getPecas().get(index).movimento(tabuleiro,x,y);
+			return j1.movePeca(tabuleiro, x, y);
 		} else {
-			return j2.getPecas().get(index).movimento(tabuleiro,x,y);
+			return j2.movePeca(tabuleiro, x, y);
 		}
 	}
 	
-	public boolean validaPeca(int x, int y,int cor) {
-		if(cor==0 ) {
-			return j1.procuraPeca(tabuleiro,x, y);
+	public static boolean validaPeca(int cor, int x, int y) {
+		if(cor==0) {
+			return j1.procuraPeca(x, y);
 		} else {
-			return j2.procuraPeca(tabuleiro,x, y);
+			return j2.procuraPeca(x, y);
 		}
 	}
 	

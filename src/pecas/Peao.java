@@ -31,9 +31,7 @@ public class Peao extends Objeto {
 		if(tabuleiro[y][x].getVazio()) {
 			if(this.getCor() == 0) {
 				if(this.jogador.getFlagPrimJog()==0) {
-					System.out.print(this.getX() + " " + this.getY() + " " + this.getCor());
 					if((this.getY()-2 == y || this.getY()-1 == y) && this.getX() == x) {
-						System.out.print("\nDDDDDDD\n");
 						this.setY(y);
 						this.jogador.setFlagPrimJog(1);
 						return true;
@@ -49,9 +47,7 @@ public class Peao extends Objeto {
 				
 			} else {
 				if(this.jogador.getFlagPrimJog()==0) {
-					System.out.print(this.getX() + " " + this.getY()+ " " + this.getCor());
 					if((this.getY()+2 == y || this.getY()+1 == y) && this.getX() == x) {
-						System.out.print("\nDDDDDDDDDD222222222222\n");
 						this.setY(y);
 						this.jogador.setFlagPrimJog(1);
 						return true;

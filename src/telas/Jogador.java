@@ -14,7 +14,8 @@ public class Jogador {
 	private int cor;
 	private int flagPrimJog;	
 	private ArrayList<Objeto> pecas = new ArrayList<Objeto>();
-	
+	private static Objeto pecaAtual;
+
 	public Jogador(int cor) {
 		this.cor=cor;
 		this.setFlagPrimJog(0);
@@ -136,12 +137,24 @@ public class Jogador {
 		return this.pecas;
 	}
 	
-	public boolean procuraPeca(Lugar[][] tabuleiro, int x, int y) {
+	public Objeto getPecaAtual() {
+		return pecaAtual;
+	}
+
+	public void setPecaAtual(Objeto pecaAtual) {
+		Jogador.pecaAtual = pecaAtual;
+	}
+	
+	public boolean procuraPeca(int x, int y) {
 		for(Objeto p : this.getPecas())
 			if(p.getX()==x && p.getY()==y) {
-				p.movimento(tabuleiro, x, y);
+				this.setPecaAtual(p);
 				return true;
 			}		
 		return false;
+	}
+	
+	public boolean movePeca(Lugar[][] tabuleiro,int x, int y) {
+		return this.getPecaAtual().movimento(tabuleiro, x, y);
 	}
 }
