@@ -9,14 +9,16 @@ public class Dama extends Objeto {
 	public Dama(int cor) {
 		this.setNome("Dama");
 		this.setCor(cor);
+		this.setCapturada(false);
 	}
 	
-	public void movimento(Lugar[][] tabuleiro, int x, int y) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(this.getCor() == 1) {
 			
 		} else {
 			
 		}
+		return false;
 	}
 
 	@Override

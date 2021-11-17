@@ -12,6 +12,7 @@ public class Torre extends Objeto {
 		this.setNome("Torre");
 		this.setCor(cor);
 		this.setFlagMovimento(0);
+		this.setCapturada(false);
 	}
 
 	public int getFlagMovimento() {
@@ -22,12 +23,13 @@ public class Torre extends Objeto {
 		this.flagMovimento = flag;
 	}
 
-	public void movimento(Lugar[][] tabuleiro, int x, int y) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(this.getCor() == 1) {
 			
 		} else {
 			
 		}
+		return false;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ public abstract class Objeto {
 	private int cor;
 	private int x;
 	private int y;
+	private boolean capturada;
 	
 	public int getX() {
 		return x;
@@ -42,6 +43,14 @@ public abstract class Objeto {
 		this.nome = nome;
 	}
 	
+	public boolean isCapturada() {
+		return capturada;
+	}
+
+	public void setCapturada(boolean capturada) {
+		this.capturada = capturada;
+	}
+	
 	public int getPosTabX(int posicao) {
 		if(posicao == -1)
 			return 80*this.getX()+80;
@@ -50,8 +59,8 @@ public abstract class Objeto {
 	
 	public int getPosTabY(int posicao) {
 		if(posicao == -1)
-			return 802-this.getY()*80;
-		return 802-posicao*80;
+			return 242+this.getY()*80;
+		return 242+posicao*80;
 	}
 	
 	public int convertePosTabX(int posicao) {
@@ -59,10 +68,10 @@ public abstract class Objeto {
 	}
 	
 	public int convertePosTabY(int posicao) {
-		return (802-posicao)/80;
+		return (posicao+242)/80;
 	}
 	
-	public abstract void movimento(Lugar[][] tabuleiro, int x, int y);
+	public abstract boolean movimento(Lugar[][] tabuleiro, int x, int y);
 	
 	public abstract JLabel movimentosPossiveis();
 }

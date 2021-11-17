@@ -9,9 +9,10 @@ public class Bispo extends Objeto {
 	public Bispo(int cor) {
 		this.setNome("Bispo");
 		this.setCor(cor);
+		this.setCapturada(false);
 	}
 	
-	public void movimento(Lugar[][] tabuleiro, int x, int y) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(this.getCor() == 1) {
 			if(this.getX()==x && this.getY()==y) {
 				this.setX(x);
@@ -20,6 +21,7 @@ public class Bispo extends Objeto {
 		} else {
 			
 		}
+		return false;
 	}
 
 	@Override

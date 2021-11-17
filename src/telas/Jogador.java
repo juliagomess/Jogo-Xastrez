@@ -22,10 +22,10 @@ public class Jogador {
 		for(int i=0;i<8;i++) {
 			Peao peao = new Peao(cor,this);
 			peao.setX(i);
-			if(cor==1) {
-				peao.setY(1);
-			} else {
+			if(cor==0) {
 				peao.setY(6);
+			} else {
+				peao.setY(1);
 			}
 			this.pecas.add(peao);
 		}
@@ -34,18 +34,18 @@ public class Jogador {
 			Torre torre = new Torre(cor);
 			if(i==0) {
 				torre.setX(0);
-				if(cor==1) {
-					torre.setY(0);
-				} else {
+				if(cor==0) {
 					torre.setY(7);
+				} else {
+					torre.setY(0);
 				}
 				
 			} else {
 				torre.setX(7);
-				if(cor==1) {
-					torre.setY(0);
-				} else {
+				if(cor==0) {
 					torre.setY(7);
+				} else {
+					torre.setY(0);
 				}
 			}
 			this.pecas.add(torre);
@@ -55,18 +55,18 @@ public class Jogador {
 			Cavalo cavalo = new Cavalo(cor);
 			if(i==0) {
 				cavalo.setX(1);
-				if(cor==1) {
-					cavalo.setY(0);
-				} else {
+				if(cor==0) {
 					cavalo.setY(7);
+				} else {
+					cavalo.setY(0);
 				}
 				
 			} else {
 				cavalo.setX(6);
-				if(cor==1) {
-					cavalo.setY(0);
-				} else {
+				if(cor==0) {
 					cavalo.setY(7);
+				} else {
+					cavalo.setY(0);
 				}
 			}
 			this.pecas.add(cavalo);
@@ -76,18 +76,18 @@ public class Jogador {
 			Bispo bispo = new Bispo(cor);
 			if(i==0) {
 				bispo.setX(2);
-				if(cor==1) {
-					bispo.setY(0);
-				} else {
+				if(cor==0) {
 					bispo.setY(7);
+				} else {
+					bispo.setY(0);
 				}
 				
 			} else {
 				bispo.setX(5);
-				if(cor==1) {
-					bispo.setY(0);
-				} else {
+				if(cor==0) {
 					bispo.setY(7);
+				} else {
+					bispo.setY(0);
 				}
 			}
 			this.pecas.add(bispo);
@@ -95,19 +95,19 @@ public class Jogador {
 		
 		Dama dama = new Dama(cor);
 		dama.setX(3);
-		if(cor==1) {
-			dama.setY(0);
-		} else {
+		if(cor==0) {
 			dama.setY(7);
+		} else {
+			dama.setY(0);
 		}
 		this.pecas.add(dama);
 		
 		Rei rei = new Rei(cor);
 		rei.setX(4);
-		if(cor==1) {
-			rei.setY(0);
-		} else {
+		if(cor==0) {
 			rei.setY(7);
+		} else {
+			rei.setY(0);
 		}
 		this.pecas.add(rei);
 	}

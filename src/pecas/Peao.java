@@ -16,6 +16,7 @@ public class Peao extends Objeto {
 		this.setNome("Peão");
 		this.setCor(cor);
 		this.setJogador(j);
+		this.setCapturada(false);
 	}
 	
 	public Jogador getJogador() {
@@ -26,35 +27,47 @@ public class Peao extends Objeto {
 		this.jogador = jogador;
 	}
  
-	public void movimento(Lugar[][] tabuleiro, int x, int y) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(tabuleiro[y][x].getVazio()) {
-			
-			if(this.getCor() == 1) {
+			if(this.getCor() == 0) {
 				if(this.jogador.getFlagPrimJog()==0) {
-					if(this.getY()-2 == y || this.getY()-1 == y && this.getX() == x) {
+					System.out.print(this.getX() + " " + this.getY() + " " + this.getCor());
+					if((this.getY()-2 == y || this.getY()-1 == y) && this.getX() == x) {
+						System.out.print("\nDDDDDDD\n");
 						this.setY(y);
 						this.jogador.setFlagPrimJog(1);
+						return true;
 					}
+					return false;
 				} else {
 					if(this.getY()-1 == y && this.getX() == x) {
 						this.setY(y);
+						return true;
 					}
+					return false;
 				}
 				
 			} else {
 				if(this.jogador.getFlagPrimJog()==0) {
-					if(this.getY()+2 == y || this.getY()+1 == y && this.getX() == x) {
+					System.out.print(this.getX() + " " + this.getY()+ " " + this.getCor());
+					if((this.getY()+2 == y || this.getY()+1 == y) && this.getX() == x) {
+						System.out.print("\nDDDDDDDDDD222222222222\n");
 						this.setY(y);
 						this.jogador.setFlagPrimJog(1);
+						return true;
 					}
+					return false;
 				} else {
 					if(this.getY()+1 == y && this.getX() == x) {
 						this.setY(y);
+						return true;
 					}
+					return false;
 				}
 			}
 			
 		}
+		return false;
 	}
 	
 	public JLabel movimentosPossiveis() {

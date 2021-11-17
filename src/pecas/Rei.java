@@ -12,6 +12,7 @@ public class Rei extends Objeto {
 		this.setNome("Rei");
 		this.setCor(cor);
 		this.setFlagMovimento(0);
+		this.setCapturada(false);
 	}
 	
 	public int getFlagMovimento() {
@@ -22,7 +23,7 @@ public class Rei extends Objeto {
 		this.flagMovimento = flag;
 	}
 	
-	public void movimento(Lugar[][] tabuleiro, int x, int y) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(
 			(this.getY()-1 == y || this.getY()+1 == y && this.getX() == x) || 
 			(this.getY() == y && this.getX()-1 == x || this.getX()+1 == x) || 
@@ -36,7 +37,8 @@ public class Rei extends Objeto {
 					this.setX(x);
 				}	
 			}
-		} 	
+		} 
+		return false;
 	}
 	
 	void roque() {

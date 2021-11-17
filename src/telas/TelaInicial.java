@@ -78,7 +78,7 @@ public class TelaInicial {
 					JOptionPane.showMessageDialog(null, "Digite o nome dos jogadores","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
 				} else {
 					Main.setJogadores(jogador1.getText(),jogador2.getText());
-					JOptionPane.showMessageDialog(null,jogador1.getText()+" usa os peões pretos\n"+jogador2.getText()+" usa os peões brancos" ,"JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,jogador1.getText()+" usa os peões brancos\n"+jogador2.getText()+" usa os peões pretos" ,"JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
 					frame.setVisible(false);
 					TelaJogo.main(null);
 				}
