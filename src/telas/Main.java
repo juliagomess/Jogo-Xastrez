@@ -29,18 +29,7 @@ public class Main {
 			if(peca!=null) {
 				tabuleiro[peca.getY()][peca.getX()].colocaPeca(peca);
 			}
-		}	
-		
-		for(int i=0;i<8;i++) {
-			System.out.print("\n");
-			for(int j=0;j<8;j++)
-				if(tabuleiro[i][j].getVazio()) {
-					System.out.print("-");
-				} else {
-					System.out.print(tabuleiro[i][j].getPeca().getCor());
-				}
-		}
-			
+		}		
 	}
 	
 	public static JLabel possibilidades(int index) {
@@ -69,6 +58,14 @@ public class Main {
 			return j1.getPecas().get(index).movimento(tabuleiro,x,y);
 		} else {
 			return j2.getPecas().get(index).movimento(tabuleiro,x,y);
+		}
+	}
+	
+	public boolean validaPeca(int x, int y,int cor) {
+		if(cor==0 ) {
+			return j1.procuraPeca(tabuleiro,x, y);
+		} else {
+			return j2.procuraPeca(tabuleiro,x, y);
 		}
 	}
 	

@@ -293,9 +293,10 @@ public class TelaJogo {
 				System.out.print(y);
 				System.out.print("\n");
 				
-				Main.movimentoPeca(0, 0, x, y);
-//				frame.setVisible(false);
-//				TelaJogo2.main(null);
+				if(Main.movimentoPeca(0, 0, x, y)) {
+					frame.setVisible(false);
+					TelaJogo2.main(null);
+				}
 			}
 		});
 		panel.setBounds(80, 240, 640, 640);
