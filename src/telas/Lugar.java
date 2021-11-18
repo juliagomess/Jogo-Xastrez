@@ -14,6 +14,11 @@ public class Lugar {
 		this.peca=peca;
 	}
 	
+	public void tiraPeca() {
+		this.vazio=true;
+		this.peca=null;
+	}
+	
 	public boolean getVazio() {
 		return this.vazio;
 	}

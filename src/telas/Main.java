@@ -1,6 +1,4 @@
 package telas;
-import javax.swing.JLabel;
-
 import pecas.Objeto;
 
 public class Main {
@@ -11,7 +9,7 @@ public class Main {
 	
 	public static void setJogadores(String nome1, String nome2) {
 		j1.setNome(nome1);
-		j2.setNome(nome2);
+		j2.setNome(nome2); 
 		
 		for(int i=0;i<8;i++)
 			for(int j=0;j<8;j++)
@@ -32,9 +30,9 @@ public class Main {
 		}		
 	}
 	
-	public static JLabel possibilidades(int index) {
-		return j1.getPecas().get(index).movimentosPossiveis();
-	}
+//	public static JLabel possibilidades(int index) {
+//		return j1.getPecas().get(index).movimentosPossiveis();
+//	}
 	
 	public static int getX(int cor,int index) {
 		if(cor==0) {
@@ -52,21 +50,32 @@ public class Main {
 		}
 	}
 	
-	public static boolean movimentoPeca(int cor,int index,int x, int y) {
+	public static boolean movimentoPeca(int cor,int x, int y) {
 		if(cor==0) {
-			System.out.print(j1.getPecas().get(index).getNome());
-			return j1.getPecas().get(index).movimento(tabuleiro,x,y);
+			return j1.movePeca(tabuleiro, x, y);
 		} else {
-			return j2.getPecas().get(index).movimento(tabuleiro,x,y);
+			return j2.movePeca(tabuleiro, x, y);
 		}
 	}
 	
-	public boolean validaPeca(int x, int y,int cor) {
-		if(cor==0 ) {
-			return j1.procuraPeca(tabuleiro,x, y);
+	public static boolean validaPeca(int cor, int x, int y) {
+		if(cor==0) {
+			return j1.procuraPeca(x, y);
 		} else {
-			return j2.procuraPeca(tabuleiro,x, y);
+			return j2.procuraPeca(x, y);
 		}
+	}
+	
+	public static boolean pecaCapturada(String nome) {
+		for(Objeto p : j1.getPecas()) {
+			if(p.isCapturada() && nome.equals(p.getNome()))
+				return true;
+		}
+		for(Objeto p : j2.getPecas()) {
+			if(p.isCapturada() && nome.equals(p.getNome()))
+				return true;
+		}
+		return false;
 	}
 	
 	public static boolean vencedor() {
@@ -74,10 +83,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		do {
-			TelaInicial.main(null);
-		}while(vencedor());
-		
+		TelaInicial.main(null);	
 	}
 
 }

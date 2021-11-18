@@ -12,20 +12,21 @@ public class Jogador {
 	
 	private String nome;
 	private int cor;
-	private int flagPrimJog;	
 	private ArrayList<Objeto> pecas = new ArrayList<Objeto>();
-	
+	private static Objeto pecaAtual;
+
 	public Jogador(int cor) {
 		this.cor=cor;
-		this.setFlagPrimJog(0);
 		
 		for(int i=0;i<8;i++) {
 			Peao peao = new Peao(cor,this);
 			peao.setX(i);
 			if(cor==0) {
 				peao.setY(6);
+				peao.setNome("pb"+(i+1));
 			} else {
 				peao.setY(1);
+				peao.setNome("pp"+(i+1));
 			}
 			this.pecas.add(peao);
 		}
@@ -36,16 +37,20 @@ public class Jogador {
 				torre.setX(0);
 				if(cor==0) {
 					torre.setY(7);
+					torre.setNome("tb"+(i+1));
 				} else {
 					torre.setY(0);
+					torre.setNome("tp"+(i+1));
 				}
 				
 			} else {
 				torre.setX(7);
 				if(cor==0) {
 					torre.setY(7);
+					torre.setNome("tb"+(i+1));
 				} else {
 					torre.setY(0);
+					torre.setNome("tp"+(i+1));
 				}
 			}
 			this.pecas.add(torre);
@@ -57,16 +62,20 @@ public class Jogador {
 				cavalo.setX(1);
 				if(cor==0) {
 					cavalo.setY(7);
+					cavalo.setNome("cb"+(i+1));
 				} else {
 					cavalo.setY(0);
+					cavalo.setNome("cp"+(i+1));
 				}
 				
 			} else {
 				cavalo.setX(6);
 				if(cor==0) {
 					cavalo.setY(7);
+					cavalo.setNome("cb"+(i+1));
 				} else {
 					cavalo.setY(0);
+					cavalo.setNome("cp"+(i+1));
 				}
 			}
 			this.pecas.add(cavalo);
@@ -78,16 +87,20 @@ public class Jogador {
 				bispo.setX(2);
 				if(cor==0) {
 					bispo.setY(7);
+					bispo.setNome("bb"+(i+1));
 				} else {
 					bispo.setY(0);
+					bispo.setNome("bp"+(i+1));
 				}
 				
 			} else {
 				bispo.setX(5);
 				if(cor==0) {
 					bispo.setY(7);
+					bispo.setNome("bb"+(i+1));
 				} else {
 					bispo.setY(0);
+					bispo.setNome("bp"+(i+1));
 				}
 			}
 			this.pecas.add(bispo);
@@ -97,8 +110,10 @@ public class Jogador {
 		dama.setX(3);
 		if(cor==0) {
 			dama.setY(7);
+			dama.setNome("db");
 		} else {
 			dama.setY(0);
+			dama.setNome("dp");
 		}
 		this.pecas.add(dama);
 		
@@ -106,18 +121,12 @@ public class Jogador {
 		rei.setX(4);
 		if(cor==0) {
 			rei.setY(7);
+			rei.setNome("rb");
 		} else {
 			rei.setY(0);
+			rei.setNome("rp");
 		}
 		this.pecas.add(rei);
-	}
-	
-	public int getFlagPrimJog() {
-		return flagPrimJog;
-	}
-
-	public void setFlagPrimJog(int flagPrim) {
-		this.flagPrimJog = flagPrim;
 	}
 	
 	public int getCor() {
@@ -136,12 +145,24 @@ public class Jogador {
 		return this.pecas;
 	}
 	
-	public boolean procuraPeca(Lugar[][] tabuleiro, int x, int y) {
+	public Objeto getPecaAtual() {
+		return pecaAtual;
+	}
+
+	public void setPecaAtual(Objeto pecaAtual) {
+		Jogador.pecaAtual = pecaAtual;
+	}
+	
+	public boolean procuraPeca(int x, int y) {
 		for(Objeto p : this.getPecas())
 			if(p.getX()==x && p.getY()==y) {
-				p.movimento(tabuleiro, x, y);
+				this.setPecaAtual(p);
 				return true;
 			}		
 		return false;
+	}
+	
+	public boolean movePeca(Lugar[][] tabuleiro,int x, int y) {
+		return this.getPecaAtual().movimento(tabuleiro, x, y);
 	}
 }

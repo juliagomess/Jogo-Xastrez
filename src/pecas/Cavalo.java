@@ -7,7 +7,6 @@ import telas.Lugar;
 public class Cavalo extends Objeto{
 	
 	public Cavalo(int cor) {
-		this.setNome("Cavalo");
 		this.setCor(cor);
 		this.setCapturada(false);
 	}
@@ -16,21 +15,29 @@ public class Cavalo extends Objeto{
 		int xOffset=Math.abs(this.getX()-x);
 		int yOffset=Math.abs(this.getY()-y);
 		
-		if((xOffset==1 && yOffset==2) || (xOffset==2 && yOffset==1) ){
-		   if(!tabuleiro[x][y].getVazio()){
-		   		if(tabuleiro[x][y].getPeca().getCor()!=this.getCor()){
-		   			//come
-		   		}	
-		   }else{
+		if((xOffset==1 && yOffset==2) || (xOffset==2 && yOffset==1)) {
+		   if(!tabuleiro[y][x].getVazio()) {
+		   		if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
+		   			tabuleiro[this.getY()][this.getX()].tiraPeca();
+		   			tabuleiro[y][x].getPeca().setCapturada(true);
+		   			tabuleiro[y][x].tiraPeca();
+		   			this.setX(x);
+					this.setY(y);
+					tabuleiro[y][x].colocaPeca(this);
+					return true;
+		   		}
+		   		
+		   } else {
+			   tabuleiro[this.getY()][this.getX()].tiraPeca();
 			   this.setY(y);
 			   this.setX(x);
+			   tabuleiro[y][x].colocaPeca(this);
+			   return true;
 		   }
 		}
-		
 		return false;
 	}
 
-	@Override
 	public JLabel movimentosPossiveis() {
 		// TODO Auto-generated method stub
 		return null;
