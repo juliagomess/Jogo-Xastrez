@@ -7,7 +7,6 @@ import telas.Lugar;
 public class Dama extends Objeto {
 
 	public Dama(int cor) {
-		this.setNome("Dama");
 		this.setCor(cor);
 		this.setCapturada(false);
 	}
@@ -21,7 +20,6 @@ public class Dama extends Objeto {
 		return false;
 	}
 
-	@Override
 	public JLabel movimentosPossiveis() {
 		// TODO Auto-generated method stub
 		return null;

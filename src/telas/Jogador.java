@@ -25,8 +25,10 @@ public class Jogador {
 			peao.setX(i);
 			if(cor==0) {
 				peao.setY(6);
+				peao.setNome("pb"+(i+1));
 			} else {
 				peao.setY(1);
+				peao.setNome("pp"+(i+1));
 			}
 			this.pecas.add(peao);
 		}
@@ -37,16 +39,20 @@ public class Jogador {
 				torre.setX(0);
 				if(cor==0) {
 					torre.setY(7);
+					torre.setNome("tb"+(i+1));
 				} else {
 					torre.setY(0);
+					torre.setNome("tp"+(i+1));
 				}
 				
 			} else {
 				torre.setX(7);
 				if(cor==0) {
 					torre.setY(7);
+					torre.setNome("tb"+(i+1));
 				} else {
 					torre.setY(0);
+					torre.setNome("tp"+(i+1));
 				}
 			}
 			this.pecas.add(torre);
@@ -58,16 +64,20 @@ public class Jogador {
 				cavalo.setX(1);
 				if(cor==0) {
 					cavalo.setY(7);
+					cavalo.setNome("cb"+(i+1));
 				} else {
 					cavalo.setY(0);
+					cavalo.setNome("cp"+(i+1));
 				}
 				
 			} else {
 				cavalo.setX(6);
 				if(cor==0) {
 					cavalo.setY(7);
+					cavalo.setNome("cb"+(i+1));
 				} else {
 					cavalo.setY(0);
+					cavalo.setNome("cp"+(i+1));
 				}
 			}
 			this.pecas.add(cavalo);
@@ -79,16 +89,20 @@ public class Jogador {
 				bispo.setX(2);
 				if(cor==0) {
 					bispo.setY(7);
+					bispo.setNome("bb"+(i+1));
 				} else {
 					bispo.setY(0);
+					bispo.setNome("bp"+(i+1));
 				}
 				
 			} else {
 				bispo.setX(5);
 				if(cor==0) {
 					bispo.setY(7);
+					bispo.setNome("bb"+(i+1));
 				} else {
 					bispo.setY(0);
+					bispo.setNome("bp"+(i+1));
 				}
 			}
 			this.pecas.add(bispo);
@@ -98,8 +112,10 @@ public class Jogador {
 		dama.setX(3);
 		if(cor==0) {
 			dama.setY(7);
+			dama.setNome("db");
 		} else {
 			dama.setY(0);
+			dama.setNome("dp");
 		}
 		this.pecas.add(dama);
 		
@@ -107,8 +123,10 @@ public class Jogador {
 		rei.setX(4);
 		if(cor==0) {
 			rei.setY(7);
+			rei.setNome("rb");
 		} else {
 			rei.setY(0);
+			rei.setNome("rp");
 		}
 		this.pecas.add(rei);
 	}

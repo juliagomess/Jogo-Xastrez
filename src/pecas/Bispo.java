@@ -24,7 +24,6 @@ public class Bispo extends Objeto {
 		return false;
 	}
 
-	@Override
 	public JLabel movimentosPossiveis() {
 		// TODO Auto-generated method stub
 		return null;

@@ -73,5 +73,5 @@ public abstract class Objeto {
 	
 	public abstract boolean movimento(Lugar[][] tabuleiro, int x, int y);
 	
-	public abstract JLabel movimentosPossiveis();
+//	public abstract JLabel movimentosPossiveis();
 }

@@ -9,7 +9,6 @@ public class Torre extends Objeto {
 	private int flagMovimento;
 	
 	public Torre(int cor) {
-		this.setNome("Torre");
 		this.setCor(cor);
 		this.setFlagMovimento(0);
 		this.setCapturada(false);
@@ -32,7 +31,6 @@ public class Torre extends Objeto {
 		return false;
 	}
 
-	@Override
 	public JLabel movimentosPossiveis() {
 		// TODO Auto-generated method stub
 		return null;

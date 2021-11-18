@@ -9,7 +9,6 @@ public class Rei extends Objeto {
 	private int flagMovimento;
 	
 	public Rei(int cor) {
-		this.setNome("Rei");
 		this.setCor(cor);
 		this.setFlagMovimento(0);
 		this.setCapturada(false);
@@ -45,7 +44,6 @@ public class Rei extends Objeto {
 		
 	}
 
-	@Override
 	public JLabel movimentosPossiveis() {
 		// TODO Auto-generated method stub
 		return null;
