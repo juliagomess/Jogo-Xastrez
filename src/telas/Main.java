@@ -1,5 +1,4 @@
 package telas;
-import javax.swing.JLabel;
 import pecas.Objeto;
 
 public class Main {

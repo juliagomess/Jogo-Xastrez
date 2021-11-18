@@ -312,11 +312,11 @@ public class TelaJogo {
 		frame.getContentPane().add(fundo);
 		fundo.setIcon(J1);
 		
-		for(JLabel p : this.labels){
+		for(JLabel p : this.labels) {
 			String nome=p.getText();
 			if(Main.pecaCapturada(nome)) {
-				p.setIcon(null);
-				p.setText("");
+				p.setVisible(false);
+				p.setBounds(720, 720, 80, 80);
 			}
 		}
 		
@@ -328,10 +328,10 @@ public class TelaJogo {
 				
 				if(flag==0) {
 					if(Main.validaPeca(0, x, y)) {
-						for(JLabel p : labels){
+						for(JLabel p : labels) {
 							int j = (int) p.getLocation().getX()/80-1;
 							int i = (int) p.getLocation().getY()/80-3;
-							if(j==x && i==y && p.getIcon()!=null) {
+							if(j==x && i==y) {
 								atual=p;
 								atual.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.red));
 								flag = 1;

@@ -1,7 +1,4 @@
 package pecas;
-
-import javax.swing.JLabel;
-
 import telas.Lugar;
 
 public abstract class Objeto {

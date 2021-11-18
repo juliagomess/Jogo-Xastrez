@@ -12,13 +12,11 @@ public class Jogador {
 	
 	private String nome;
 	private int cor;
-	private int flagPrimJog;	
 	private ArrayList<Objeto> pecas = new ArrayList<Objeto>();
 	private static Objeto pecaAtual;
 
 	public Jogador(int cor) {
 		this.cor=cor;
-		this.setFlagPrimJog(0);
 		
 		for(int i=0;i<8;i++) {
 			Peao peao = new Peao(cor,this);
@@ -129,14 +127,6 @@ public class Jogador {
 			rei.setNome("rp");
 		}
 		this.pecas.add(rei);
-	}
-	
-	public int getFlagPrimJog() {
-		return flagPrimJog;
-	}
-
-	public void setFlagPrimJog(int flagPrim) {
-		this.flagPrimJog = flagPrim;
 	}
 	
 	public int getCor() {
