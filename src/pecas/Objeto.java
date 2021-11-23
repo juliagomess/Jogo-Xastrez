@@ -7,6 +7,7 @@ public abstract class Objeto {
 	private int x;
 	private int y;
 	private boolean capturada;
+	private int flagMovimento;
 	
 	public int getX() {
 		return x;
@@ -46,6 +47,14 @@ public abstract class Objeto {
 
 	public void setCapturada(boolean capturada) {
 		this.capturada = capturada;
+	}
+	
+	public int getFlagMovimento() {
+		return flagMovimento;
+	}
+
+	public void setFlagMovimento(int flagMovimento) {
+		this.flagMovimento = flagMovimento;
 	}
 	
 	public int getPosTabX(int posicao) {
