@@ -1,7 +1,5 @@
 package pecas;
 
-import javax.swing.JLabel;
-
 import telas.Lugar;
 
 public class Cavalo extends Objeto{
@@ -36,10 +34,5 @@ public class Cavalo extends Objeto{
 		   }
 		}
 		return false;
-	}
-
-	public JLabel movimentosPossiveis() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

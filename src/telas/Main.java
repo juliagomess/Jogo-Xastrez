@@ -5,7 +5,10 @@ public class Main {
 	
 	private static Jogador j1 = new Jogador(0); //branco
 	private static Jogador j2 = new Jogador(1); //preto
+	private static Jogador vencedor;
 	private static Lugar[][] tabuleiro = new Lugar[8][8];
+	private static Objeto pecaAtual;
+	private static int empate=0;
 	
 	public static void setJogadores(String nome1, String nome2) {
 		j1.setNome(nome1);
@@ -27,12 +30,30 @@ public class Main {
 			if(peca!=null) {
 				tabuleiro[peca.getY()][peca.getX()].colocaPeca(peca);
 			}
-		}		
+		}
 	}
 	
-//	public static JLabel possibilidades(int index) {
-//		return j1.getPecas().get(index).movimentosPossiveis();
-//	}
+	public static void imprimeTabuleiro() {
+		for(int i=0;i<8;i++) {
+			System.out.print("\n");
+			for(int j=0;j<8;j++) {
+				if(tabuleiro[i][j].getPeca()==null) {
+					System.out.print("- ");
+				} else {
+					System.out.print(tabuleiro[i][j].getPeca().getCor() + " ");
+				}
+			}
+		}
+		System.out.print("\n");
+	}
+	
+	public static String getNome(int cor) {
+		if(cor==0) {
+			return j1.getNome();
+		} else {
+			return j2.getNome();
+		}
+	}
 	
 	public static int getX(int cor,int index) {
 		if(cor==0) {
@@ -50,19 +71,33 @@ public class Main {
 		}
 	}
 	
-	public static boolean movimentoPeca(int cor,int x, int y) {
-		if(cor==0) {
-			return j1.movePeca(tabuleiro, x, y);
-		} else {
-			return j2.movePeca(tabuleiro, x, y);
+	public static int setaLugarX(String nome) {
+		for(int i=0;i<8;i++) {
+			for(int j=0;j<8;j++) {
+				if(tabuleiro[i][j].getPeca()!=null) {
+					if(tabuleiro[i][j].getPeca().getNome().equals(nome)) {
+						return tabuleiro[i][j].getPeca().getPosTabX(-1);
+					}
+				}
+			}
 		}
+		return 970;
+	}
+	
+	public static boolean movimentoPeca(int cor,int x, int y) {
+		return pecaAtual.movimento(tabuleiro, x, y);
 	}
 	
 	public static boolean validaPeca(int cor, int x, int y) {
-		if(cor==0) {
-			return j1.procuraPeca(x, y);
+		if(tabuleiro[y][x].getPeca()==null) {
+			return false;
+		}
+		if(tabuleiro[y][x].getPeca().getCor()==cor) {
+			pecaAtual=tabuleiro[y][x].getPeca();
+			return true;
+			
 		} else {
-			return j2.procuraPeca(x, y);
+			return false;
 		}
 	}
 	
@@ -78,12 +113,35 @@ public class Main {
 		return false;
 	}
 	
-	public static boolean vencedor() {
-		return false;
+	public static int getEmpate() {
+		return empate;
+	}
+	
+	public static void empate(int cor, int tipo) {
+		if(tipo==0) {
+			if(cor==0) {
+				empate=1;
+			} else {
+				empate=2;
+			}
+		} else {
+			empate=0;
+		}
+	}
+	
+	public static void desiste(int cor) {
+		if(cor==0) {
+			vencedor=j2;
+		} else {
+			vencedor=j1;
+		}
+	}
+	
+	public static String getVencedor() {
+		return vencedor.getNome();
 	}
 
 	public static void main(String[] args) {
 		TelaInicial.main(null);	
 	}
-
 }
