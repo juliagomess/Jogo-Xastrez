@@ -5,11 +5,15 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -65,7 +69,7 @@ public class TelaJogo {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1050, 1000);
+		frame.setBounds(10, 10, 1050, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -75,6 +79,13 @@ public class TelaJogo {
 		btnEmpate.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnEmpate.setBounds(840, 417, 170, 82);
 		frame.getContentPane().add(btnEmpate);
+		btnEmpate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.empate(0, 0);
+				frame.setVisible(false);
+				TelaJogo2.main(null);
+			}
+		});
 		
 		JButton btnDesistir = new JButton("Desistir");
 		btnDesistir.setForeground(Color.BLACK);
@@ -82,6 +93,14 @@ public class TelaJogo {
 		btnDesistir.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		btnDesistir.setBounds(840, 590, 170, 82);
 		frame.getContentPane().add(btnDesistir);
+		btnDesistir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,Main.getNome(0) + " desistiu do jogo","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+				Main.desiste(0);
+				frame.setVisible(false);
+				//TelaVitoria
+			}
+		});
 		
 		JLabel tp1 = new JLabel("tb1");
 		tp1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -316,7 +335,21 @@ public class TelaJogo {
 			String nome=p.getText();
 			if(Main.pecaCapturada(nome)) {
 				p.setVisible(false);
-				p.setBounds(720, 720, 80, 80);
+				p.setBounds(970, 40, 80, 80);
+			}
+		}
+		
+		Main.imprimeTabuleiro();
+		
+		if(Main.getEmpate()==2) {
+			int resposta = JOptionPane.showConfirmDialog(null,Main.getNome(1) + " deseja concluir o jogo com empate. Concorda?");
+			if(resposta==0) {
+				//TelaEmpate
+			} else {
+				JOptionPane.showMessageDialog(null,Main.getNome(0) + " não aceitou o empate","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+				Main.empate(0,1);
+				frame.setVisible(false);
+				TelaJogo2.main(null);
 			}
 		}
 		
@@ -331,7 +364,7 @@ public class TelaJogo {
 						for(JLabel p : labels) {
 							int j = (int) p.getLocation().getX()/80-1;
 							int i = (int) p.getLocation().getY()/80-3;
-							if(j==x && i==y) {
+							if(j==x && i==y ) {
 								atual=p;
 								atual.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.red));
 								flag = 1;
@@ -348,11 +381,11 @@ public class TelaJogo {
 					atual.setBorder(null);
 				}
 				
-				System.out.print("\n");
-				System.out.print(x);
-				System.out.print("\n");
-				System.out.print(y);
-				System.out.print("\n");
+//				System.out.print("\n");
+//				System.out.print(x);
+//				System.out.print("\n");
+//				System.out.print(y);
+//				System.out.print("\n");
 			}
 		});
 		panel.setBounds(80, 240, 640, 640);

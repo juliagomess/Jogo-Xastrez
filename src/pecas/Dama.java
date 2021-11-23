@@ -1,7 +1,4 @@
 package pecas;
-
-import javax.swing.JLabel;
-
 import telas.Lugar;
 
 public class Dama extends Objeto {
@@ -11,9 +8,9 @@ public class Dama extends Objeto {
 		this.setCapturada(false);
 	}
 	
-	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
-		int xOffset=x-this.getX();
-		int yOffset=y-this.getY();
+	public boolean movimento(Lugar[][] tabuleiro, int toX, int toY) {
+		int xOffset=toX-this.getX();
+		int yOffset=toY-this.getY();
 		int dir=0;
 		
 		if(xOffset==0 && yOffset==0) {
@@ -50,54 +47,52 @@ public class Dama extends Objeto {
 			return false;
 		}
 		
-		int j=this.getX();
-		int i=this.getY();
-		while(!(j==x && i==y)){
+		int x=this.getX();
+		int y=this.getY();
+		while(!(x==toX && y==toY)){
 			switch(dir){
 				case 1:
-					i--;
+					y--;
 				break;
 				case 3:
-					j++;
+					x++;
 				break;
 				case 5:
-					i++;
+					y++;
 				break;
 				case 7:
-					j--;
+					x--;
 				break;
 				case 2:
-					i--;
-					j++;
+					y--;
+					x++;
 				break;
 				case 4:
-					j++;
-					i++;
+					x++;
+					y++;
 				break;
 				case 6:
-					j--;
-					i++;
+					x--;
+					y++;
 				break;
 				case 8:
-					j--;
-					i--;
+					x--;
+					y--;
 				break;
 			}
-			if(!tabuleiro[i][j].getVazio()){
+			if(!tabuleiro[y][x].getVazio()){
 				break;
 			}			
 		}
 		
-		if(j==x && i==y){
+		if(x==toX && y==toY){
 			if(tabuleiro[y][x].getVazio()){
-				System.out.print(tabuleiro[y][x].getVazio() + "\n");
 				tabuleiro[this.getY()][this.getX()].tiraPeca();
 				this.setY(y);
 				this.setX(x);
 				tabuleiro[y][x].colocaPeca(this);
 				return true;
-			}
-			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()){
+			} else if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()){
 				tabuleiro[this.getY()][this.getX()].tiraPeca();
 	   			tabuleiro[y][x].getPeca().setCapturada(true);
 	   			tabuleiro[y][x].tiraPeca();
@@ -110,8 +105,4 @@ public class Dama extends Objeto {
 		return false;
 	}
 
-	public JLabel movimentosPossiveis() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -1,7 +1,5 @@
 package pecas;
 
-import javax.swing.JLabel;
-
 import telas.Lugar;
 
 public class Bispo extends Objeto {
@@ -77,10 +75,5 @@ public class Bispo extends Objeto {
 			}
 		}
 		return false;
-	}
-
-	public JLabel movimentosPossiveis() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

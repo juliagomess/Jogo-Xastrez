@@ -1,7 +1,5 @@
 package pecas;
 
-import javax.swing.JLabel;
-
 import telas.Lugar;
 
 public class Rei extends Objeto {
@@ -54,10 +52,5 @@ public class Rei extends Objeto {
 	
 	void roque() {
 		
-	}
-
-	public JLabel movimentosPossiveis() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
