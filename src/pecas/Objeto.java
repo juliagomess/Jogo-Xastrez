@@ -77,7 +77,23 @@ public abstract class Objeto {
 		return (posicao+242)/80;
 	}
 	
-	public abstract boolean movimento(Lugar[][] tabuleiro, int x, int y);
+	public abstract boolean movimento(Lugar[][] tabuleiro, int x, int y, int flag);
+	
+	public void move(Lugar[][] tabuleiro, int x, int y) {
+		tabuleiro[this.getY()][this.getX()].tiraPeca();
+		this.setX(x);
+		this.setY(y);
+		tabuleiro[y][x].colocaPeca(this); 
+	}
+	
+	public void captura(Lugar[][] tabuleiro, int x, int y) {
+		tabuleiro[this.getY()][this.getX()].tiraPeca(); 
+		tabuleiro[y][x].getPeca().setCapturada(true);
+		tabuleiro[y][x].tiraPeca();
+		this.setX(x);
+		this.setY(y);
+		tabuleiro[y][x].colocaPeca(this);
+	}
 	
 //	public abstract JLabel movimentosPossiveis();
 }

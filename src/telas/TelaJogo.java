@@ -81,9 +81,14 @@ public class TelaJogo {
 		frame.getContentPane().add(btnEmpate);
 		btnEmpate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.empate(0, 0);
-				frame.setVisible(false);
-				TelaJogo2.main(null);
+				int resposta = JOptionPane.showConfirmDialog(null,Main.getNome(0) + " deseja concluir o jogo com empate. Concorda?");
+				if(resposta==0) {
+					frame.setVisible(false);
+					//TelaEmpate
+				} else {
+					JOptionPane.showMessageDialog(null,Main.getNome(1) + " não aceitou o empate","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+
+				}
 			}
 		});
 		
@@ -340,17 +345,9 @@ public class TelaJogo {
 		}
 		
 		Main.imprimeTabuleiro();
-		
-		if(Main.getEmpate()==2) {
-			int resposta = JOptionPane.showConfirmDialog(null,Main.getNome(1) + " deseja concluir o jogo com empate. Concorda?");
-			if(resposta==0) {
-				//TelaEmpate
-			} else {
-				JOptionPane.showMessageDialog(null,Main.getNome(0) + " não aceitou o empate","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
-				Main.empate(0,1);
-				frame.setVisible(false);
-				TelaJogo2.main(null);
-			}
+		if(Main.xeque(0,-1,-1)) {
+			frame.setVisible(true);
+			JOptionPane.showMessageDialog(null,"Você esta em xeque!!","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
 		}
 		
 		JPanel panel = new JPanel();
@@ -367,6 +364,7 @@ public class TelaJogo {
 							if(j==x && i==y ) {
 								atual=p;
 								atual.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.red));
+								
 								flag = 1;
 								break;
 							}
@@ -380,12 +378,6 @@ public class TelaJogo {
 					flag = 0;
 					atual.setBorder(null);
 				}
-				
-//				System.out.print("\n");
-//				System.out.print(x);
-//				System.out.print("\n");
-//				System.out.print(y);
-//				System.out.print("\n");
 			}
 		});
 		panel.setBounds(80, 240, 640, 640);

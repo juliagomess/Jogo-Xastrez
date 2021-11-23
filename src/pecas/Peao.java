@@ -21,23 +21,16 @@ public class Peao extends Objeto {
 		this.jogador = jogador;
 	}
 
-	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
-		if(tabuleiro[y][x].getVazio()) {
+	public boolean movimento(Lugar[][] tabuleiro, int x, int y, int flag) {
+		if(tabuleiro[y][x].getVazio() && flag==0) {
 			if(this.getCor() == 0) {
 				if(this.getFlagMovimento()==0) {
 					if((this.getY()-2 == y || this.getY()-1 == y) && this.getX() == x) {
-						tabuleiro[this.getY()][this.getX()].tiraPeca();
-						this.setY(y);
-						tabuleiro[y][x].colocaPeca(this);
-						this.setFlagMovimento(1);
 						return true;
 					}
 					
 				} else {
 					if(this.getY()-1 == y && this.getX() == x) {
-						tabuleiro[this.getY()][this.getX()].tiraPeca();
-						this.setY(y);
-						tabuleiro[y][x].colocaPeca(this);
 						return true;
 					}
 				}
@@ -45,18 +38,11 @@ public class Peao extends Objeto {
 			} else {
 				if(this.getFlagMovimento()==0) {
 					if((this.getY()+2 == y || this.getY()+1 == y) && this.getX() == x) {
-						tabuleiro[this.getY()][this.getX()].tiraPeca();
-						this.setY(y);
-						tabuleiro[y][x].colocaPeca(this); 
-						this.setFlagMovimento(1);
 						return true;
 					}
 					
 				} else {
 					if(this.getY()+1 == y && this.getX() == x) {
-						tabuleiro[this.getY()][this.getX()].tiraPeca();
-						this.setY(y);
-						tabuleiro[y][x].colocaPeca(this);
 						return true;
 					}
 					return false;
@@ -64,28 +50,34 @@ public class Peao extends Objeto {
 			}
 			
 		} else {
-			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
-				if(this.getCor() == 0) {
-					if(this.getY()-1 == y && (this.getX()+1 == x || this.getX()-1 == x)) {
-						tabuleiro[this.getY()][this.getX()].tiraPeca(); //tira a peça de onde tava
-						tabuleiro[y][x].getPeca().setCapturada(true);
-						tabuleiro[y][x].tiraPeca();
-						this.setX(x); //seta nova posição
-						this.setY(y);
-						tabuleiro[y][x].colocaPeca(this);
-						return true;
-					}
-					
-				} else {
-					if(this.getY()+1 == y && (this.getX()+1 == x || this.getX()-1 == x)) {
-						tabuleiro[this.getY()][this.getX()].tiraPeca();
-						tabuleiro[y][x].getPeca().setCapturada(true);
-						tabuleiro[y][x].tiraPeca();
-						this.setX(x);
-						this.setY(y);
-						tabuleiro[y][x].colocaPeca(this);
-						return true;
-					}
+			return come(tabuleiro,x,y);
+		}
+		return false;
+	}
+	
+	public boolean come(Lugar[][] tabuleiro, int x, int y) {
+		if(tabuleiro[y][x].getPeca()==null) {
+			if(this.getCor() == 0) {
+				if(this.getY()-1 == y && (this.getX()+1 == x || this.getX()-1 == x)) {
+					return true;
+				}
+				
+			} else {
+				if(this.getY()+1 == y && (this.getX()+1 == x || this.getX()-1 == x)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
+			if(this.getCor() == 0) {
+				if(this.getY()-1 == y && (this.getX()+1 == x || this.getX()-1 == x)) {
+					return true;
+				}
+				
+			} else {
+				if(this.getY()+1 == y && (this.getX()+1 == x || this.getX()-1 == x)) {
+					return true;
 				}
 			}
 		}
