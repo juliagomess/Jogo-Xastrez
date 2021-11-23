@@ -10,7 +10,7 @@ public class Torre extends Objeto {
 		this.setCapturada(false);
 	}
 
-	public boolean movimento(Lugar[][] tabuleiro, int toX, int toY) {
+	public boolean movimento(Lugar[][] tabuleiro, int toX, int toY, int flag) {
 		int xOffset=this.getX()-toX;
 		int yOffset=this.getY()-toY;
 		int dir=0;
@@ -59,22 +59,10 @@ public class Torre extends Objeto {
 		
 		if(x==toX && y==toY){
 			if(tabuleiro[y][x].getVazio()) {
-				tabuleiro[this.getY()][this.getX()].tiraPeca();
-				this.setY(y);
-				this.setX(x);
-				tabuleiro[y][x].colocaPeca(this);
-				this.setFlagMovimento(1);
 				return true;
 			}
 
 			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
-				tabuleiro[this.getY()][this.getX()].tiraPeca();
-	   			tabuleiro[y][x].getPeca().setCapturada(true);
-	   			tabuleiro[y][x].tiraPeca();
-	   			this.setX(x);
-				this.setY(y);
-				tabuleiro[y][x].colocaPeca(this);
-				this.setFlagMovimento(1);
 				return true;
 			}
 		}
