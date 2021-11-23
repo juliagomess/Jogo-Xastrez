@@ -5,13 +5,12 @@ import telas.Lugar;
 public class Peao extends Objeto {
 	
 	private Jogador jogador;
-	private int flagPrimJog;
 	
 	public Peao(int cor,Jogador j) {
 		this.setCor(cor);
 		this.setJogador(j);
 		this.setCapturada(false);
-		this.setFlagPrimJog(0);
+		this.setFlagMovimento(0);
 	}
 	
 	public Jogador getJogador() {
@@ -21,24 +20,16 @@ public class Peao extends Objeto {
 	public void setJogador(Jogador jogador) {
 		this.jogador = jogador;
 	}
-	
-	public int getFlagPrimJog() {
-		return flagPrimJog;
-	}
-	public void setFlagPrimJog(int flagPrim) {
-		this.flagPrimJog = flagPrim;
-	}
 
- 
 	public boolean movimento(Lugar[][] tabuleiro, int x, int y) {
 		if(tabuleiro[y][x].getVazio()) {
 			if(this.getCor() == 0) {
-				if(this.getFlagPrimJog()==0) {
+				if(this.getFlagMovimento()==0) {
 					if((this.getY()-2 == y || this.getY()-1 == y) && this.getX() == x) {
 						tabuleiro[this.getY()][this.getX()].tiraPeca();
 						this.setY(y);
 						tabuleiro[y][x].colocaPeca(this);
-						this.setFlagPrimJog(1);
+						this.setFlagMovimento(1);
 						return true;
 					}
 					
@@ -52,12 +43,12 @@ public class Peao extends Objeto {
 				}
 				
 			} else {
-				if(this.getFlagPrimJog()==0) {
+				if(this.getFlagMovimento()==0) {
 					if((this.getY()+2 == y || this.getY()+1 == y) && this.getX() == x) {
 						tabuleiro[this.getY()][this.getX()].tiraPeca();
 						this.setY(y);
 						tabuleiro[y][x].colocaPeca(this); 
-						this.setFlagPrimJog(1);
+						this.setFlagMovimento(1);
 						return true;
 					}
 					

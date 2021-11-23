@@ -4,20 +4,10 @@ import telas.Lugar;
 
 public class Torre extends Objeto {
 	
-	private int flagMovimento;
-	
 	public Torre(int cor) {
 		this.setCor(cor);
 		this.setFlagMovimento(0);
 		this.setCapturada(false);
-	}
-
-	public int getFlagMovimento() {
-		return flagMovimento;
-	}
-
-	public void setFlagMovimento(int flag) {
-		this.flagMovimento = flag;
 	}
 
 	public boolean movimento(Lugar[][] tabuleiro, int toX, int toY) {
@@ -73,6 +63,7 @@ public class Torre extends Objeto {
 				this.setY(y);
 				this.setX(x);
 				tabuleiro[y][x].colocaPeca(this);
+				this.setFlagMovimento(1);
 				return true;
 			}
 
@@ -83,6 +74,7 @@ public class Torre extends Objeto {
 	   			this.setX(x);
 				this.setY(y);
 				tabuleiro[y][x].colocaPeca(this);
+				this.setFlagMovimento(1);
 				return true;
 			}
 		}
