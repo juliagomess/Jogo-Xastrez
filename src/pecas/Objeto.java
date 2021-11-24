@@ -6,6 +6,8 @@ public abstract class Objeto {
 	private int cor;
 	private int x;
 	private int y;
+	private int oldX;
+	private int oldY;
 	private boolean capturada;
 	private int flagMovimento;
 	
@@ -81,9 +83,18 @@ public abstract class Objeto {
 	
 	public void move(Lugar[][] tabuleiro, int x, int y) {
 		tabuleiro[this.getY()][this.getX()].tiraPeca();
+		oldX=this.getX();
+		oldY=this.getY();
 		this.setX(x);
 		this.setY(y);
 		tabuleiro[y][x].colocaPeca(this); 
+	}
+	
+	public void volta(Lugar[][] tabuleiro) {
+		tabuleiro[this.getY()][this.getX()].tiraPeca();
+		this.setX(oldX);
+		this.setY(oldY);
+		tabuleiro[oldY][oldX].colocaPeca(this); 
 	}
 	
 	public void captura(Lugar[][] tabuleiro, int x, int y) {

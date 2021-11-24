@@ -70,18 +70,25 @@ public class Main {
 		}
 	}
 	
-	public static boolean movimentoPeca(int cor,int x, int y) {
-		if(pecaAtual.movimento(tabuleiro, x, y,0)) {
-			if(tabuleiro[y][x].getPeca()==null) {
-				pecaAtual.move(tabuleiro, x, y);
-				pecaAtual.setFlagMovimento(1);
-				return true;
-			} else {
-				pecaAtual.captura(tabuleiro, x, y);
-				pecaAtual.setFlagMovimento(1);
-				return true;
+	public static boolean movimentoPeca(int x, int y) {
+		if(xeque(pecaAtual.getCor(),-1,-1)) {
+			if(!impedeXeque(x,y)) {
+				return false;
 			}
-		}
+			return true;
+		} else {
+			if(pecaAtual.movimento(tabuleiro, x, y,0)) {
+				if(tabuleiro[y][x].getPeca()==null) {
+					pecaAtual.move(tabuleiro, x, y);
+					pecaAtual.setFlagMovimento(1);
+					return true;
+				} else {
+					pecaAtual.captura(tabuleiro, x, y);
+					pecaAtual.setFlagMovimento(1);
+					return true;
+				}
+			}
+		}	
 		return false;
 	}
 	
@@ -210,6 +217,18 @@ public class Main {
 		}
 		return true;
 	}
+	
+	public static boolean impedeXeque(int x, int y) {
+        if(pecaAtual.movimento(tabuleiro, x, y,0)) {
+            pecaAtual.move(tabuleiro, x, y);
+            if(xeque(pecaAtual.getCor(),-1,-1)) {
+                pecaAtual.volta(tabuleiro);
+                return false;
+            }
+            pecaAtual.setFlagMovimento(1);
+        }
+        return true;
+    }
 
 	public static void main(String[] args) {
 		TelaInicial.main(null);	

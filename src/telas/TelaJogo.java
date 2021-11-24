@@ -375,7 +375,7 @@ public class TelaJogo {
 						}
 					}
 				} else {
-					if(Main.movimentoPeca(0, x, y)) {
+					if(Main.movimentoPeca(x, y)) {
 						frame.setVisible(false);
 						TelaJogo2.main(null);
 					}
