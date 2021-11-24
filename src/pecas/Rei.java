@@ -15,13 +15,17 @@ public class Rei extends Objeto {
 		int xOffset=Math.abs(this.getX()-x);
 		int yOffset=Math.abs(this.getY()-y);
 		
+		if(x<0 || y<0) {
+			return false;
+		}
+		
 		if(xOffset==0 && yOffset==0) {
 			return false;
 		}
 		if(xOffset>1 || yOffset>1) {
 		    return this.roque(tabuleiro, x, y);
 		}
-		if(!tabuleiro[y][x].getVazio()) {
+		if(!tabuleiro[y][x].getVazio() && !Main.xeque(this.getCor(),x,y)) {
 			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
 				return true;
 			}

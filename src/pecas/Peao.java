@@ -50,13 +50,13 @@ public class Peao extends Objeto {
 			}
 			
 		} else {
-			return come(tabuleiro,x,y);
+			return come(tabuleiro,x,y,flag);
 		}
 		return false;
 	}
 	
-	public boolean come(Lugar[][] tabuleiro, int x, int y) {
-		if(tabuleiro[y][x].getPeca()==null) {
+	public boolean come(Lugar[][] tabuleiro, int x, int y,int flag) {
+		if(tabuleiro[y][x].getPeca()==null && flag==1) {
 			if(this.getCor() == 0) {
 				if(this.getY()-1 == y && (this.getX()+1 == x || this.getX()-1 == x)) {
 					return true;
