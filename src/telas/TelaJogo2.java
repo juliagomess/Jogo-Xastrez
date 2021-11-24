@@ -344,10 +344,14 @@ public class TelaJogo2 {
 		}
 		
 		Main.imprimeTabuleiro();
-		if(Main.xeque(1,-1,-1)) {
+		if(Main.xequeMate(1)) {
+			JOptionPane.showMessageDialog(null,"XAQUE-MATE","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
+			frame.setVisible(false);
+			//Tela vitoria
+		} else if(Main.xeque(1,-1,-1)) {
 			frame.setVisible(true);
 			JOptionPane.showMessageDialog(null,"Você esta em xeque!!","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
-		}
+		} 
 		
 		JPanel panel = new JPanel();
 		panel.addMouseListener(new MouseAdapter() {

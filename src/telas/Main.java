@@ -169,6 +169,45 @@ public class Main {
 		}
 		return false;
 	}
+	
+	public static boolean xequeMate(int cor) {
+		if(cor==0) {
+			Objeto rei = j1.getPecas().get(15);
+			for(Objeto p : j2.getPecas()) {
+				if(!p.isCapturada() && p.movimento(tabuleiro,rei.getX(),rei.getY(),1)) {
+					if(!rei.movimento(tabuleiro,rei.getX()+1,rei.getY(), 1)   && !rei.movimento(tabuleiro,rei.getX(),rei.getY()+1, 1)   &&
+					   !rei.movimento(tabuleiro,rei.getX()-1,rei.getY(), 1)   && !rei.movimento(tabuleiro,rei.getX(),rei.getY()-1, 1)   &&
+					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()+1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()-1, 1) &&
+					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()-1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()+1, 1) ) {
+						for(Objeto o : j1.getPecas()) {
+							if(!(o.isCapturada() && o.movimento(tabuleiro,p.getX(),p.getY(),1))) {
+								vencedor=j2;
+								return true;
+							}
+						}
+					}
+				} 
+			}			
+		} else {
+			Objeto rei = j2.getPecas().get(15);
+			for(Objeto p : j1.getPecas()) {
+				if(!p.isCapturada() && p.movimento(tabuleiro,rei.getX(),rei.getY(),1)) {
+					if(!rei.movimento(tabuleiro,rei.getX()+1,rei.getY(), 1)   && !rei.movimento(tabuleiro,rei.getX(),rei.getY()+1, 1)   &&
+					   !rei.movimento(tabuleiro,rei.getX()-1,rei.getY(), 1)   && !rei.movimento(tabuleiro,rei.getX(),rei.getY()-1, 1)   &&
+					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()+1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()-1, 1) &&
+					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()-1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()+1, 1) ) {
+						for(Objeto o : j2.getPecas()) {
+							if(!(o.isCapturada() && o.movimento(tabuleiro,p.getX(),p.getY(),1))) {
+								vencedor=j1;
+								return true;
+							}
+						}
+					}
+				}
+			}					
+		}
+		return false;
+	}
 
 	public static void main(String[] args) {
 		TelaInicial.main(null);	
