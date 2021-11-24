@@ -70,19 +70,6 @@ public class Main {
 		}
 	}
 	
-	public static int setaLugarX(String nome) {
-		for(int i=0;i<8;i++) {
-			for(int j=0;j<8;j++) {
-				if(tabuleiro[i][j].getPeca()!=null) {
-					if(tabuleiro[i][j].getPeca().getNome().equals(nome)) {
-						return tabuleiro[i][j].getPeca().getPosTabX(-1);
-					}
-				}
-			}
-		}
-		return 970;
-	}
-	
 	public static boolean movimentoPeca(int cor,int x, int y) {
 		if(pecaAtual.movimento(tabuleiro, x, y,0)) {
 			if(tabuleiro[y][x].getPeca()==null) {
