@@ -171,6 +171,7 @@ public class Main {
 	}
 	
 	public static boolean xequeMate(int cor) {
+		int flag=0;
 		if(cor==0) {
 			Objeto rei = j1.getPecas().get(15);
 			for(Objeto p : j2.getPecas()) {
@@ -180,14 +181,21 @@ public class Main {
 					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()+1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()-1, 1) &&
 					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()-1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()+1, 1) ) {
 						for(Objeto o : j1.getPecas()) {
-							if(!(o.isCapturada() && o.movimento(tabuleiro,p.getX(),p.getY(),1))) {
-								vencedor=j2;
-								return true;
+							if(!o.isCapturada() && o.movimento(tabuleiro,p.getX(),p.getY(),1)) {
+								return false;
 							}
 						}
+					} else {
+						flag++;
 					}
-				} 
-			}			
+				} else {
+					flag++;
+				}
+			}
+			if(flag==16) {
+				return false;
+			}
+			vencedor=j2;
 		} else {
 			Objeto rei = j2.getPecas().get(15);
 			for(Objeto p : j1.getPecas()) {
@@ -197,16 +205,23 @@ public class Main {
 					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()+1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()-1, 1) &&
 					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()-1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()+1, 1) ) {
 						for(Objeto o : j2.getPecas()) {
-							if(!(o.isCapturada() && o.movimento(tabuleiro,p.getX(),p.getY(),1))) {
-								vencedor=j1;
-								return true;
+							if(!o.isCapturada() && o.movimento(tabuleiro,p.getX(),p.getY(),1)) {
+								return false;
 							}
 						}
+					} else {
+						flag++;
 					}
+				} else {
+					flag++;
 				}
-			}					
+			}
+			if(flag==16) {
+				return false;
+			}
+			vencedor=j1;
 		}
-		return false;
+		return true;
 	}
 
 	public static void main(String[] args) {
