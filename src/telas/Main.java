@@ -193,11 +193,14 @@ public class Main {
 		} else {
 			Objeto rei = j2.getPecas().get(15);
 			for(Objeto p : j1.getPecas()) {
+				System.out.print("\n"+flag);
 				if(!p.isCapturada() && p.movimento(tabuleiro,rei.getX(),rei.getY(),1)) {
+					System.out.print(p.getNome());
 					if(!rei.movimento(tabuleiro,rei.getX()+1,rei.getY(), 1)   && !rei.movimento(tabuleiro,rei.getX(),rei.getY()+1, 1)   &&
 					   !rei.movimento(tabuleiro,rei.getX()-1,rei.getY(), 1)   && !rei.movimento(tabuleiro,rei.getX(),rei.getY()-1, 1)   &&
 					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()+1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()-1, 1) &&
 					   !rei.movimento(tabuleiro,rei.getX()+1,rei.getY()-1, 1) && !rei.movimento(tabuleiro,rei.getX()-1,rei.getY()+1, 1) ) {
+						System.out.print("entrouuuu");
 						for(Objeto o : j2.getPecas()) {
 							if(!o.isCapturada() && o.movimento(tabuleiro,p.getX(),p.getY(),1)) {
 								return false;
@@ -210,6 +213,7 @@ public class Main {
 					flag++;
 				}
 			}
+			System.out.print("\n"+flag+"\n");
 			if(flag==16) {
 				return false;
 			}
@@ -226,8 +230,9 @@ public class Main {
                 return false;
             }
             pecaAtual.setFlagMovimento(1);
+            return true;
         }
-        return true;
+        return false;
     }
 
 	public static void main(String[] args) {
