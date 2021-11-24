@@ -25,15 +25,18 @@ public class Rei extends Objeto {
 		if(xOffset>1 || yOffset>1) {
 		    return this.roque(tabuleiro, x, y);
 		}
-		if(!tabuleiro[y][x].getVazio() && !Main.xeque(this.getCor(),x,y)) {
+		if(!Main.xeque(this.getCor(),x,y)) {
+			return false;
+		}
+		
+		if(!tabuleiro[y][x].getVazio()) {
 			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
 				return true;
 			}
 			return false;
-		} else if (!Main.xeque(this.getCor(),x,y)) {
+		} else {
 			return true;
 		}
-		return false;
 	}
 	
 	public boolean roque(Lugar[][] tabuleiro, int x, int y) {
