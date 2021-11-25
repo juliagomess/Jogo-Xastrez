@@ -68,9 +68,6 @@ public class Rei extends Objeto {
 			
 			for(i=this.getX()+1;tabuleiro[this.getY()][i].getPeca()==null;i++);
 			if(tabuleiro[this.getY()][i].getPeca().getNome().equals(nome + '2')) {
-				tabuleiro[this.getY()][this.getX()].tiraPeca();
-				this.setX(x);
-				tabuleiro[y][x].colocaPeca(this);
 				
 				tabuleiro[this.getY()][x+1].getPeca().setX(x-1);
 				tabuleiro[y][x-1].colocaPeca(tabuleiro[this.getY()][x+1].getPeca());
@@ -91,9 +88,6 @@ public class Rei extends Objeto {
 			
 			for(i=this.getX()-1;tabuleiro[this.getY()][i].getPeca()==null;i--);
 			if(tabuleiro[this.getY()][i].getPeca().getNome().equals(nome + '1')) {
-				tabuleiro[this.getY()][this.getX()].tiraPeca();
-				this.setX(x);
-				tabuleiro[y][x].colocaPeca(this);
 				
 				tabuleiro[this.getY()][x-2].getPeca().setX(x+1);
 				tabuleiro[y][x+1].colocaPeca(tabuleiro[this.getY()][x-2].getPeca());
