@@ -59,8 +59,7 @@ public class Bispo extends Objeto {
 			if(tabuleiro[y][x].getVazio()){
 				return true;
 			}
-
-			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()){
+			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor() || flag==1){
 				return true;
 			}
 		}

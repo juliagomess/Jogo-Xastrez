@@ -62,7 +62,7 @@ public class Torre extends Objeto {
 				return true;
 			}
 
-			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
+			if(tabuleiro[y][x].getPeca().getCor()!=this.getCor() || flag==1) {
 				return true;
 			}
 		}

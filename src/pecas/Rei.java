@@ -14,8 +14,12 @@ public class Rei extends Objeto {
 	public boolean movimento(Lugar[][] tabuleiro, int x, int y, int flag) {
 		int xOffset=Math.abs(this.getX()-x);
 		int yOffset=Math.abs(this.getY()-y);
-		
+
 		if(x<0 || y<0) {
+			return false;
+		}
+		
+		if(x>7 || y>7) {
 			return false;
 		}
 		

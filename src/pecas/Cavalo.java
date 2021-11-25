@@ -15,7 +15,7 @@ public class Cavalo extends Objeto{
 		
 		if((xOffset==1 && yOffset==2) || (xOffset==2 && yOffset==1)) {
 		   if(!tabuleiro[y][x].getVazio()) {
-		   		if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()) {
+		   		if(tabuleiro[y][x].getPeca().getCor()!=this.getCor() || flag==1) {
 					return true;
 		   		}
 		   		

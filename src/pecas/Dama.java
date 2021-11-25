@@ -88,7 +88,7 @@ public class Dama extends Objeto {
 		if(x==toX && y==toY){
 			if(tabuleiro[y][x].getVazio()){
 				return true;
-			} else if(tabuleiro[y][x].getPeca().getCor()!=this.getCor()){
+			} else if(tabuleiro[y][x].getPeca().getCor()!=this.getCor() || flag==1){
 				return true;
 			}
 		}
