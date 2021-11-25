@@ -54,14 +54,14 @@ public class TelaInicial {
 		
 		jogador1 = new JTextField();
 		jogador1.setHorizontalAlignment(SwingConstants.CENTER);
-		jogador1.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		jogador1.setFont(new Font("Algerian", Font.PLAIN, 20));
 		jogador1.setBounds(174, 176, 393, 46);
 		frame.getContentPane().add(jogador1);
 		jogador1.setColumns(10);
 		
 		jogador2 = new JTextField();
 		jogador2.setHorizontalAlignment(SwingConstants.CENTER);
-		jogador2.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		jogador2.setFont(new Font("Algerian", Font.PLAIN, 20));
 		jogador2.setColumns(10);
 		jogador2.setBounds(174, 314, 393, 46);
 		frame.getContentPane().add(jogador2);
@@ -69,7 +69,7 @@ public class TelaInicial {
 		JButton btnJogar = new JButton("Jogar");
 		btnJogar.setBackground(SystemColor.menu);
 		btnJogar.setForeground(Color.BLACK);
-		btnJogar.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btnJogar.setFont(new Font("Algerian", Font.PLAIN, 20));
 		btnJogar.setBounds(289, 396, 164, 46);
 		frame.getContentPane().add(btnJogar);
 		btnJogar.addActionListener(new ActionListener() {

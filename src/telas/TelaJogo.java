@@ -27,7 +27,7 @@ public class TelaJogo {
 	JLabel atual;
 
 	private JFrame frame;
-	ImageIcon J1 = new ImageIcon(getClass().getResource("../imagens/fundoJ1.png"));
+	ImageIcon f = new ImageIcon(getClass().getResource("../imagens/fundoJogo.png"));
 	ImageIcon pp = new ImageIcon(getClass().getResource("../imagens/peaop.png"));
 	ImageIcon pb = new ImageIcon(getClass().getResource("../imagens/peaob.png"));
 	ImageIcon tp = new ImageIcon(getClass().getResource("../imagens/torrep.png"));
@@ -81,10 +81,10 @@ public class TelaJogo {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnEmpate = new JButton("Sugerir Empate");
+		JButton btnEmpate = new JButton("Sugerir \r\nEmpate");
 		btnEmpate.setForeground(Color.BLACK);
 		btnEmpate.setBackground(SystemColor.menu);
-		btnEmpate.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btnEmpate.setFont(new Font("Algerian", Font.PLAIN, 16));
 		btnEmpate.setBounds(840, 417, 170, 82);
 		frame.getContentPane().add(btnEmpate);
 		btnEmpate.addActionListener(new ActionListener() {
@@ -92,7 +92,7 @@ public class TelaJogo {
 				int resposta = JOptionPane.showConfirmDialog(null,Main.getNome(cor) + " deseja concluir o jogo com empate. Concorda?");
 				if(resposta==0) {
 					frame.setVisible(false);
-					//TelaEmpate
+					TelaEmpate.main(null);
 				} else {
 					JOptionPane.showMessageDialog(null,Main.getNome(inimigo) + " não aceitou o empate","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
 
@@ -103,7 +103,7 @@ public class TelaJogo {
 		JButton btnDesistir = new JButton("Desistir");
 		btnDesistir.setForeground(Color.BLACK);
 		btnDesistir.setBackground(SystemColor.menu);
-		btnDesistir.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		btnDesistir.setFont(new Font("Algerian", Font.PLAIN, 16));
 		btnDesistir.setBounds(840, 590, 170, 82);
 		frame.getContentPane().add(btnDesistir);
 		btnDesistir.addActionListener(new ActionListener() {
@@ -111,7 +111,7 @@ public class TelaJogo {
 				JOptionPane.showMessageDialog(null,Main.getNome(cor) + " desistiu do jogo","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
 				Main.desiste();
 				frame.setVisible(false);
-				//TelaVitoria
+				TelaVitoria.main(null);
 			}
 		});
 		
@@ -339,10 +339,17 @@ public class TelaJogo {
 		tb2.setIcon(tb);
 		this.labels.add(tb2);
 		
+		JLabel lblNewLabel = new JLabel(Main.getNome(cor));
+		lblNewLabel.setBackground(Color.BLACK);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Algerian", Font.PLAIN, 72));
+		lblNewLabel.setBounds(415, 79, 480, 80);
+		frame.getContentPane().add(lblNewLabel);
+		
 		JLabel fundo = new JLabel("");
 		fundo.setBounds(0, 0, 1034, 961);
 		frame.getContentPane().add(fundo);
-		fundo.setIcon(J1);
+		fundo.setIcon(f);
 		
 		for(JLabel p : this.labels) {
 			String nome=p.getText();
@@ -356,7 +363,7 @@ public class TelaJogo {
 		if(Main.xequeMate()) {
 			JOptionPane.showMessageDialog(null,"XAQUE-MATE","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
 			frame.setVisible(false);
-			//Tela vitoria
+			TelaVitoria.main(null);
 		} else if(Main.xeque(-1,-1)) {
 			frame.setVisible(true);
 			JOptionPane.showMessageDialog(null,"Você esta em xeque!!","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
