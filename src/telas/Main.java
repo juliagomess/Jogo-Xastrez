@@ -5,6 +5,7 @@ public class Main {
 	
 	private static Jogador j1 = new Jogador(0); //branco
 	private static Jogador j2 = new Jogador(1); //preto
+	private static Jogador jogadorAtual;
 	private static Jogador vencedor;
 	private static Lugar[][] tabuleiro = new Lugar[8][8];
 	private static Objeto pecaAtual;
@@ -30,6 +31,11 @@ public class Main {
 				tabuleiro[peca.getY()][peca.getX()].colocaPeca(peca);
 			}
 		}
+		jogadorAtual=j1;
+	}
+	
+	public static int vez() {
+		return jogadorAtual.getCor();
 	}
 	
 	public static void imprimeTabuleiro() {
@@ -71,9 +77,14 @@ public class Main {
 	}
 	
 	public static boolean movimentoPeca(int x, int y) {
-		if(xeque(pecaAtual.getCor(),-1,-1)) {
+		if(xeque(-1,-1)) {
 			if(!impedeXeque(x,y)) {
 				return false;
+			}
+			if(jogadorAtual.getCor()==0) {
+				jogadorAtual=j2;
+			} else {
+				jogadorAtual=j1;
 			}
 			return true;
 		} else {
@@ -81,10 +92,20 @@ public class Main {
 				if(tabuleiro[y][x].getPeca()==null) {
 					pecaAtual.move(tabuleiro, x, y);
 					pecaAtual.setFlagMovimento(1);
+					if(jogadorAtual.getCor()==0) {
+						jogadorAtual=j2;
+					} else {
+						jogadorAtual=j1;
+					}
 					return true;
 				} else {
 					pecaAtual.captura(tabuleiro, x, y);
 					pecaAtual.setFlagMovimento(1);
+					if(jogadorAtual.getCor()==0) {
+						jogadorAtual=j2;
+					} else {
+						jogadorAtual=j1;
+					}
 					return true;
 				}
 			}
@@ -92,11 +113,11 @@ public class Main {
 		return false;
 	}
 	
-	public static boolean validaPeca(int cor, int x, int y) {
+	public static boolean validaPeca(int x, int y) {
 		if(tabuleiro[y][x].getPeca()==null) {
 			return false;
 		}
-		if(tabuleiro[y][x].getPeca().getCor()==cor) {
+		if(tabuleiro[y][x].getPeca().getCor()==jogadorAtual.getCor()) {
 			pecaAtual=tabuleiro[y][x].getPeca();
 			return true;
 			
@@ -117,8 +138,8 @@ public class Main {
 		return false;
 	}
 	
-	public static void desiste(int cor) {
-		if(cor==0) {
+	public static void desiste() {
+		if(jogadorAtual.getCor()==0) {
 			vencedor=j2;
 		} else {
 			vencedor=j1;
@@ -129,10 +150,10 @@ public class Main {
 		return vencedor.getNome();
 	}
 	
-	public static boolean xeque(int cor, int toX, int toY) {
+	public static boolean xeque(int toX, int toY) {
 		int x;
 		int y;
-		if(cor==0) {
+		if(jogadorAtual.getCor()==0) {
 			Objeto rei = j1.getPecas().get(15);
 			if(toX!=-1) {
 				x=toX;
@@ -164,9 +185,9 @@ public class Main {
 		return false;
 	}
 	
-	public static boolean xequeMate(int cor) {
+	public static boolean xequeMate() {
 		int flag=0;
-		if(cor==0) {
+		if(jogadorAtual.getCor()==0) {
 			Objeto rei = j1.getPecas().get(15);
 			for(Objeto p : j2.getPecas()) {
 				if(!p.isCapturada() && p.movimento(tabuleiro,rei.getX(),rei.getY(),1)) {
@@ -221,7 +242,7 @@ public class Main {
 	public static boolean impedeXeque(int x, int y) {
         if(pecaAtual.movimento(tabuleiro, x, y,0)) {
             pecaAtual.move(tabuleiro, x, y);
-            if(xeque(pecaAtual.getCor(),-1,-1)) {
+            if(xeque(-1,-1)) {
                 pecaAtual.volta(tabuleiro);
                 return false;
             }

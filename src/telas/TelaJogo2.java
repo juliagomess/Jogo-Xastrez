@@ -100,7 +100,7 @@ public class TelaJogo2 {
 		btnDesistir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,Main.getNome(1) + " desistiu do jogo","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
-				Main.desiste(1);
+				Main.desiste();
 				frame.setVisible(false);
 				//TelaVitoria
 			}
@@ -344,11 +344,11 @@ public class TelaJogo2 {
 		}
 		
 		Main.imprimeTabuleiro();
-		if(Main.xequeMate(1)) {
+		if(Main.xequeMate()) {
 			JOptionPane.showMessageDialog(null,"XAQUE-MATE","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
 			frame.setVisible(false);
 			//Tela vitoria
-		} else if(Main.xeque(1,-1,-1)) {
+		} else if(Main.xeque(-1,-1)) {
 			frame.setVisible(true);
 			JOptionPane.showMessageDialog(null,"Você esta em xeque!!","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
 		} 
@@ -360,7 +360,7 @@ public class TelaJogo2 {
 				int y=e.getY()/80;
 				
 				if(flag==0) {
-					if(Main.validaPeca(1, x, y)) {
+					if(Main.validaPeca(x, y)) {
 						for(JLabel p : labels) {
 							int j = (int) p.getLocation().getX()/80-1;
 							int i = (int) p.getLocation().getY()/80-3;
