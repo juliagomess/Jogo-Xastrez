@@ -1,4 +1,6 @@
 package telas;
+import java.io.FileWriter;
+import java.io.IOException;
 import pecas.Objeto;
 
 public class Main {
@@ -9,6 +11,7 @@ public class Main {
 	private static Jogador vencedor;
 	private static Lugar[][] tabuleiro = new Lugar[8][8];
 	private static Objeto pecaAtual;
+	private static String jogadas="";
 	
 	public static void setJogadores(String nome1, String nome2) {
 		j1.setNome(nome1);
@@ -89,8 +92,10 @@ public class Main {
 			return true;
 		} else {
 			if(pecaAtual.movimento(tabuleiro, x, y,0)) {
+				registraMovimento(pecaAtual.getX(),pecaAtual.getY(),0);
 				if(tabuleiro[y][x].getPeca()==null) {
 					pecaAtual.move(tabuleiro, x, y);
+					registraMovimento(x,y,1);
 					pecaAtual.setFlagMovimento(1);
 					if(jogadorAtual.getCor()==0) {
 						jogadorAtual=j2;
@@ -100,6 +105,7 @@ public class Main {
 					return true;
 				} else {
 					pecaAtual.captura(tabuleiro, x, y);
+					registraMovimento(x,y,1);
 					pecaAtual.setFlagMovimento(1);
 					if(jogadorAtual.getCor()==0) {
 						jogadorAtual=j2;
@@ -111,6 +117,10 @@ public class Main {
 			}
 		}	
 		return false;
+	}
+	
+	public static boolean movimentosPossiveis(int x, int y) {
+		return pecaAtual.movimento(tabuleiro, x, y, 0);
 	}
 	
 	public static boolean validaPeca(int x, int y) {
@@ -146,7 +156,8 @@ public class Main {
 		}
 	}
 	
-	public static String getVencedor() {
+	public static String getVencedor() throws IOException {
+		registraPartida();
 		return vencedor.getNome();
 	}
 	
@@ -251,6 +262,26 @@ public class Main {
         }
         return false;
     }
+	
+	public static void registraMovimento(int x, int y, int flag) {
+		char letra = (char) (x + 65);
+		char numero = (char) (y + 48);
+		System.out.print("\n"+letra+" "+numero+"\n");
+		jogadas+=letra;
+		jogadas+=numero;
+		if(flag==0) {
+			jogadas+=">";
+		} else {
+			jogadas+=" ";
+			System.out.print("\n"+jogadas+"\n");
+		}
+	}
+	
+	public static void registraPartida() throws IOException {
+		FileWriter writer = new FileWriter("Jogo.txt");
+		writer.write(jogadas);
+		writer.close();
+	}
 
 	public static void main(String[] args) {
 		TelaInicial.main(null);	

@@ -65,4 +65,6 @@ public class Bispo extends Objeto {
 		}
 		return false;
 	}
+
+	
 }

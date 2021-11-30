@@ -339,12 +339,12 @@ public class TelaJogo {
 		tb2.setIcon(tb);
 		this.labels.add(tb2);
 		
-		JLabel lblNewLabel = new JLabel(Main.getNome(cor));
-		lblNewLabel.setBackground(Color.BLACK);
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Algerian", Font.PLAIN, 72));
-		lblNewLabel.setBounds(415, 79, 480, 80);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel nomeJogador = new JLabel(Main.getNome(cor));
+		nomeJogador.setBackground(Color.BLACK);
+		nomeJogador.setForeground(Color.WHITE);
+		nomeJogador.setFont(new Font("Algerian", Font.PLAIN, 72));
+		nomeJogador.setBounds(415, 79, 480, 80);
+		frame.getContentPane().add(nomeJogador);
 		
 		JLabel fundo = new JLabel("");
 		fundo.setBounds(0, 0, 1034, 961);
@@ -388,6 +388,18 @@ public class TelaJogo {
 								break;
 							}
 						}
+						
+						for(int z=0;z<8;z++) {
+							for(int k=0;k<8;k++) {
+								if(Main.movimentosPossiveis(z, k)) {
+									JLabel l = new JLabel("");
+									l.setBounds( 80*z+80, 242+k*80, 80, 80);
+									l.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.green));
+									frame.getContentPane().add(l);
+								}
+							}
+						}
+						
 					}
 				} else {
 					if(Main.movimentoPeca(x, y)) {

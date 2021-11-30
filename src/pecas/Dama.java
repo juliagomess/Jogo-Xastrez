@@ -95,4 +95,5 @@ public class Dama extends Objeto {
 		return false;
 	}
 
+	
 }

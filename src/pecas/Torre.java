@@ -69,4 +69,5 @@ public class Torre extends Objeto {
 		return false;
 	}
 
+	
 }

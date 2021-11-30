@@ -1,4 +1,8 @@
 package pecas;
+import java.util.ArrayList;
+
+import javax.swing.JLabel;
+
 import telas.Lugar;
 
 public abstract class Objeto {
@@ -10,6 +14,7 @@ public abstract class Objeto {
 	private int oldY;
 	private boolean capturada;
 	private int flagMovimento;
+	private ArrayList<JLabel> possibilidade = new ArrayList<JLabel>();
 	
 	public int getX() {
 		return x;
@@ -59,6 +64,14 @@ public abstract class Objeto {
 		this.flagMovimento = flagMovimento;
 	}
 	
+	public ArrayList<JLabel> getPossibilidade() {
+		return possibilidade;
+	}
+	
+	public void setPossibilidade(JLabel p) {
+		this.possibilidade.add(p);
+	}
+	
 	public int getPosTabX(int posicao) {
 		if(posicao == -1)
 			return 80*this.getX()+80;
@@ -105,6 +118,4 @@ public abstract class Objeto {
 		this.setY(y);
 		tabuleiro[y][x].colocaPeca(this);
 	}
-	
-//	public abstract JLabel movimentosPossiveis();
 }

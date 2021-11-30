@@ -83,33 +83,4 @@ public class Peao extends Objeto {
 		}
 		return false;
 	}
-	
-//	public JLabel movimentosPossiveis() {
-//		if(this.jogador.getFlagPrimJog()==0) {
-//			
-//			int px=this.getPosTabX(-1);
-//			int py=this.getY();
-//			
-//			py+=2;
-//			py=this.getPosTabY(py);
-//			
-//			JLabel p = new JLabel("AQUI");
-//			p.setHorizontalAlignment(SwingConstants.CENTER);
-//			p.setBounds(px, py, 80, 80);
-//			p.setBorder(BorderFactory.createLineBorder(Color.RED));
-//			return p;
-//		}
-//	}
-	
-	public void transforma(int jogador, int x, int y) {
-		if(jogador == 1) {
-			if(y==7) {
-				//transforma
-			}
-		} else {
-			if(y==0) {
-				//transforma
-			}
-		}
-	}
 }
