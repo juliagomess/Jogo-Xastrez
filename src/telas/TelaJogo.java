@@ -1,6 +1,5 @@
 package telas;
 import java.awt.EventQueue;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -11,7 +10,6 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -67,7 +65,7 @@ public class TelaJogo {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() {	
 		int cor = Main.vez();
 		int inimigo;
 		if(cor==0) {
@@ -81,40 +79,55 @@ public class TelaJogo {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnEmpate = new JButton("Sugerir \r\nEmpate");
-		btnEmpate.setForeground(Color.BLACK);
-		btnEmpate.setBackground(SystemColor.menu);
-		btnEmpate.setFont(new Font("Algerian", Font.PLAIN, 16));
-		btnEmpate.setBounds(840, 417, 170, 82);
-		frame.getContentPane().add(btnEmpate);
-		btnEmpate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int resposta = JOptionPane.showConfirmDialog(null,Main.getNome(cor) + " deseja concluir o jogo com empate. Concorda?");
-				if(resposta==0) {
-					frame.setVisible(false);
-					TelaEmpate.main(null);
-				} else {
-					JOptionPane.showMessageDialog(null,Main.getNome(inimigo) + " não aceitou o empate","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
-
+		if(Main.getRever()==0) {
+			JButton btnEmpate = new JButton("Sugerir \r\nEmpate");
+			btnEmpate.setForeground(Color.BLACK);
+			btnEmpate.setBackground(SystemColor.menu);
+			btnEmpate.setFont(new Font("Algerian", Font.PLAIN, 16));
+			btnEmpate.setBounds(840, 417, 170, 82);
+			frame.getContentPane().add(btnEmpate);
+			btnEmpate.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int resposta = JOptionPane.showConfirmDialog(null,Main.getNome(cor) + " deseja concluir o jogo com empate. Concorda?");
+					if(resposta==0) {
+						frame.setVisible(false);
+						TelaEmpate.main(null);
+					} else {
+						JOptionPane.showMessageDialog(null,Main.getNome(inimigo) + " não aceitou o empate","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+	
+					}
 				}
-			}
-		});
-		
-		JButton btnDesistir = new JButton("Desistir");
-		btnDesistir.setForeground(Color.BLACK);
-		btnDesistir.setBackground(SystemColor.menu);
-		btnDesistir.setFont(new Font("Algerian", Font.PLAIN, 16));
-		btnDesistir.setBounds(840, 590, 170, 82);
-		frame.getContentPane().add(btnDesistir);
-		btnDesistir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,Main.getNome(cor) + " desistiu do jogo","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
-				Main.desiste();
-				frame.setVisible(false);
-				TelaVitoria.main(null);
-			}
-		});
-		
+			});
+			
+			JButton btnDesistir = new JButton("Desistir");
+			btnDesistir.setForeground(Color.BLACK);
+			btnDesistir.setBackground(SystemColor.menu);
+			btnDesistir.setFont(new Font("Algerian", Font.PLAIN, 16));
+			btnDesistir.setBounds(840, 590, 170, 82);
+			frame.getContentPane().add(btnDesistir);
+			btnDesistir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(null,Main.getNome(cor) + " desistiu do jogo","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+					Main.desiste();
+					frame.setVisible(false);
+					TelaVitoria.main(null);
+				}
+			});
+		} else {
+			JButton btnNext = new JButton("Próximo");
+			btnNext.setForeground(Color.BLACK);
+			btnNext.setBackground(SystemColor.menu);
+			btnNext.setFont(new Font("Algerian", Font.PLAIN, 16));
+			btnNext.setBounds(840, 590, 170, 82);
+			frame.getContentPane().add(btnNext);
+			btnNext.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					frame.setVisible(false);
+					TelaJogo.main(null);
+				}
+			});
+		}
+			
 		JLabel tp1 = new JLabel("tb1");
 		tp1.setHorizontalAlignment(SwingConstants.LEFT);
 		tp1.setBounds(Main.getX(1, 8), Main.getY(1, 8), 80, 80);
@@ -369,49 +382,78 @@ public class TelaJogo {
 			JOptionPane.showMessageDialog(null,"Você esta em xeque!!","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
 		} 
 		
-		JPanel panel = new JPanel();
-		panel.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				int x=e.getX()/80;
-				int y=e.getY()/80;
-				
-				if(flag==0) {
-					if(Main.validaPeca(x, y)) {
-						for(JLabel p : labels) {
-							int j = (int) p.getLocation().getX()/80-1;
-							int i = (int) p.getLocation().getY()/80-3;
-							if(j==x && i==y ) {
-								atual=p;
-								atual.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.red));
-								
-								flag = 1;
-								break;
-							}
-						}
-						
-						for(int z=0;z<8;z++) {
-							for(int k=0;k<8;k++) {
-								if(Main.movimentosPossiveis(z, k)) {
-									JLabel l = new JLabel("");
-									l.setBounds( 80*z+80, 242+k*80, 80, 80);
-									l.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.green));
-									frame.getContentPane().add(l);
-								}
-							}
-						}
-						
-					}
-				} else {
-					if(Main.movimentoPeca(x, y)) {
-						frame.setVisible(false);
-						TelaJogo.main(null);
-					}
-					flag = 0;
-					atual.setBorder(null);
+		if(Main.getRever()==1) {
+			int j1 = Main.simula(0);
+			if(j1==9) {
+				JOptionPane.showMessageDialog(null,"Esse jogo acabou","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+				frame.setVisible(false);
+			}
+			
+			int i1 = Main.simula(1);
+			Main.setpecaAtual(j1,i1);
+			
+			for(JLabel p : labels) {
+				int j = (int) p.getLocation().getX()/80-1;
+				int i = (int) p.getLocation().getY()/80-3;
+				if(j==j1 && i==i1) {
+					atual=p;
+					atual.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.red));
+					break;
 				}
 			}
-		});
-		panel.setBounds(80, 240, 640, 640);
-		frame.getContentPane().add(panel);
+			
+			j1 = Main.simula(0);
+			i1 = Main.simula(1);
+			
+			Main.movimentoPeca(j1, i1);
+			atual.setBorder(null);
+			
+		} else {
+			
+			JPanel panel = new JPanel();
+			panel.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					int x=e.getX()/80;
+					int y=e.getY()/80;
+					
+					if(flag==0) {
+						if(Main.validaPeca(x, y)) {
+							for(JLabel p : labels) {
+								int j = (int) p.getLocation().getX()/80-1;
+								int i = (int) p.getLocation().getY()/80-3;
+								if(j==x && i==y ) {
+									atual=p;
+									atual.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.red));
+									
+									flag = 1;
+									break;
+								}
+							}
+							
+							for(int z=0;z<8;z++) {
+								for(int k=0;k<8;k++) {
+									if(Main.movimentosPossiveis(z, k)) {
+										JLabel l = new JLabel("");
+										l.setBounds( 80*z+80, 242+k*80, 80, 80);
+										l.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.green));
+										frame.getContentPane().add(l);
+									}
+								}
+							}
+							
+						}
+					} else {
+						if(Main.movimentoPeca(x, y)) {
+							frame.setVisible(false);
+							TelaJogo.main(null);
+						}
+						flag = 0;
+						atual.setBorder(null);
+					}
+				}
+			});
+			panel.setBounds(80, 240, 640, 640);
+			frame.getContentPane().add(panel);
+		}
 	}
 }

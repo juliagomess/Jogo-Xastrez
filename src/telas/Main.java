@@ -1,6 +1,9 @@
 package telas;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 import pecas.Objeto;
 
 public class Main {
@@ -12,6 +15,21 @@ public class Main {
 	private static Lugar[][] tabuleiro = new Lugar[8][8];
 	private static Objeto pecaAtual;
 	private static String jogadas="";
+	private static int rever=0;
+	
+	public static int getRever() {
+		return rever;
+	}
+
+	public static void setRever(int jogo) throws FileNotFoundException {
+		rever = jogo;
+		setJogadores("1","2");
+		simulaJogo();
+	}
+	
+	public static void setpecaAtual(int x, int y) {
+		pecaAtual=tabuleiro[y][x].getPeca();
+	}
 	
 	public static void setJogadores(String nome1, String nome2) {
 		j1.setNome(nome1);
@@ -92,10 +110,18 @@ public class Main {
 			return true;
 		} else {
 			if(pecaAtual.movimento(tabuleiro, x, y,0)) {
-				registraMovimento(pecaAtual.getX(),pecaAtual.getY(),0);
+				
+				if(getRever()==0) {
+					registraMovimento(pecaAtual.getX(),pecaAtual.getY(),0);
+				}
+				
 				if(tabuleiro[y][x].getPeca()==null) {
 					pecaAtual.move(tabuleiro, x, y);
-					registraMovimento(x,y,1);
+					
+					if(getRever()==0) {
+						registraMovimento(x,y,1);
+					}
+					
 					pecaAtual.setFlagMovimento(1);
 					if(jogadorAtual.getCor()==0) {
 						jogadorAtual=j2;
@@ -105,7 +131,11 @@ public class Main {
 					return true;
 				} else {
 					pecaAtual.captura(tabuleiro, x, y);
-					registraMovimento(x,y,1);
+					
+					if(getRever()==0) {
+						registraMovimento(x,y,1);
+					}
+					
 					pecaAtual.setFlagMovimento(1);
 					if(jogadorAtual.getCor()==0) {
 						jogadorAtual=j2;
@@ -273,7 +303,6 @@ public class Main {
 			jogadas+=">";
 		} else {
 			jogadas+=" ";
-			System.out.print("\n"+jogadas+"\n");
 		}
 	}
 	
@@ -282,8 +311,34 @@ public class Main {
 		writer.write(jogadas);
 		writer.close();
 	}
+	
+	public static void simulaJogo() throws FileNotFoundException {
+		Scanner useDelimiter = new Scanner(new File("Jogo.txt"), "UTF-8").useDelimiter("\\A");
+		jogadas = useDelimiter.next();
+		System.out.print(jogadas);
+	}
+	
+	public static int simula(int flag) {
+		int x;
+		if(jogadas.length()==1) {
+			return 9;
+		}
+		if(jogadas.charAt(0)=='>' || jogadas.charAt(0)==' ') {
+			jogadas=jogadas.substring(1);
+		}
+		if(flag==0) {
+			x = jogadas.charAt(0) - 65; 
+		} else {
+			x = jogadas.charAt(0) - 48;
+		}
+		
+		jogadas=jogadas.substring(1);
+		System.out.print("\n" +x + "\n");
+		System.out.print(jogadas);
+		return x;
+	}
 
-	public static void main(String[] args) {
-		TelaInicial.main(null);	
+	public static void main(String[] args) throws FileNotFoundException {
+		TelaZero.main(null);	
 	}
 }
