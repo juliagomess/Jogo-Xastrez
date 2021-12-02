@@ -252,11 +252,19 @@ public class Main {
 	
 	public static boolean impedeXeque(int x, int y) {
         if(pecaAtual.movimento(tabuleiro, x, y,0)) {
-            pecaAtual.move(tabuleiro, x, y);
-            if(xeque(-1,-1)) {
-                pecaAtual.volta(tabuleiro);
-                return false;
-            }
+        	if(tabuleiro[y][x].getPeca()==null) {
+        		pecaAtual.move(tabuleiro, x, y);
+        		if(xeque(-1,-1)) {
+                    pecaAtual.volta(tabuleiro,0);
+                    return false;
+                }
+        	} else {
+        		pecaAtual.captura(tabuleiro, x, y);
+        		if(xeque(-1,-1)) {
+	                pecaAtual.volta(tabuleiro,1);
+	                return false;
+	            }
+        	}	            
             pecaAtual.setFlagMovimento(1);
             return true;
         }
