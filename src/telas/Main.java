@@ -23,7 +23,7 @@ public class Main {
 
 	public static void setRever(int jogo) throws FileNotFoundException {
 		rever = jogo;
-		setJogadores("1","2");
+		setJogadores("Branco","Preto");
 		simulaJogo();
 	}
 	
@@ -102,50 +102,41 @@ public class Main {
 			if(!impedeXeque(x,y)) {
 				return false;
 			}
-			if(jogadorAtual.getCor()==0) {
-				jogadorAtual=j2;
-			} else {
-				jogadorAtual=j1;
+		} 
+		if(pecaAtual.movimento(tabuleiro, x, y,0)) {
+			if(getRever()==0) {
+				registraMovimento(pecaAtual.getX(),pecaAtual.getY(),0);
 			}
-			return true;
-		} else {
-			if(pecaAtual.movimento(tabuleiro, x, y,0)) {
+			
+			if(tabuleiro[y][x].getPeca()==null) {
+				pecaAtual.move(tabuleiro, x, y);
+				if(getRever()==0) {
+					registraMovimento(x,y,1);
+				}
+				
+				pecaAtual.setFlagMovimento(1);
+				if(jogadorAtual.getCor()==0) {
+					jogadorAtual=j2;
+				} else {
+					jogadorAtual=j1;
+				}
+				return true;
+			} else {
+				pecaAtual.captura(tabuleiro, x, y);
 				
 				if(getRever()==0) {
-					registraMovimento(pecaAtual.getX(),pecaAtual.getY(),0);
+					registraMovimento(x,y,1);
 				}
 				
-				if(tabuleiro[y][x].getPeca()==null) {
-					pecaAtual.move(tabuleiro, x, y);
-					
-					if(getRever()==0) {
-						registraMovimento(x,y,1);
-					}
-					
-					pecaAtual.setFlagMovimento(1);
-					if(jogadorAtual.getCor()==0) {
-						jogadorAtual=j2;
-					} else {
-						jogadorAtual=j1;
-					}
-					return true;
+				pecaAtual.setFlagMovimento(1);
+				if(jogadorAtual.getCor()==0) {
+					jogadorAtual=j2;
 				} else {
-					pecaAtual.captura(tabuleiro, x, y);
-					
-					if(getRever()==0) {
-						registraMovimento(x,y,1);
-					}
-					
-					pecaAtual.setFlagMovimento(1);
-					if(jogadorAtual.getCor()==0) {
-						jogadorAtual=j2;
-					} else {
-						jogadorAtual=j1;
-					}
-					return true;
+					jogadorAtual=j1;
 				}
+				return true;
 			}
-		}	
+		}
 		return false;
 	}
 	
@@ -282,12 +273,21 @@ public class Main {
 	
 	public static boolean impedeXeque(int x, int y) {
         if(pecaAtual.movimento(tabuleiro, x, y,0)) {
-            pecaAtual.move(tabuleiro, x, y);
-            if(xeque(-1,-1)) {
-                pecaAtual.volta(tabuleiro);
-                return false;
-            }
-            pecaAtual.setFlagMovimento(1);
+        	if(tabuleiro[y][x].getPeca()==null) {
+        		pecaAtual.move(tabuleiro, x, y);
+        		if(xeque(-1,-1)) {
+                    pecaAtual.volta(tabuleiro,0);
+                    return false;
+                }
+        		pecaAtual.volta(tabuleiro,0);
+        	} else {
+        		pecaAtual.captura(tabuleiro, x, y);
+        		if(xeque(-1,-1)) {
+	                pecaAtual.volta(tabuleiro,1);
+	                return false;
+	            }
+        		pecaAtual.volta(tabuleiro,1);
+        	}
             return true;
         }
         return false;

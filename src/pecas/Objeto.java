@@ -14,6 +14,7 @@ public abstract class Objeto {
 	private int oldY;
 	private boolean capturada;
 	private int flagMovimento;
+	private Objeto peca;
 	private ArrayList<JLabel> possibilidade = new ArrayList<JLabel>();
 	
 	public int getX() {
@@ -103,17 +104,24 @@ public abstract class Objeto {
 		tabuleiro[y][x].colocaPeca(this); 
 	}
 	
-	public void volta(Lugar[][] tabuleiro) {
+	public void volta(Lugar[][] tabuleiro, int flag) {
 		tabuleiro[this.getY()][this.getX()].tiraPeca();
 		this.setX(oldX);
 		this.setY(oldY);
 		tabuleiro[oldY][oldX].colocaPeca(this); 
+		if(flag==1) {
+			tabuleiro[this.peca.getY()][this.peca.getX()].colocaPeca(peca);
+			tabuleiro[this.peca.getY()][this.peca.getX()].getPeca().setCapturada(false);
+		}
 	}
 	
 	public void captura(Lugar[][] tabuleiro, int x, int y) {
 		tabuleiro[this.getY()][this.getX()].tiraPeca(); 
 		tabuleiro[y][x].getPeca().setCapturada(true);
+		this.peca=tabuleiro[y][x].getPeca();
 		tabuleiro[y][x].tiraPeca();
+		oldX=this.getX();
+		oldY=this.getY();
 		this.setX(x);
 		this.setY(y);
 		tabuleiro[y][x].colocaPeca(this);

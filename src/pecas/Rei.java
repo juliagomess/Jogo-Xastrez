@@ -26,7 +26,10 @@ public class Rei extends Objeto {
 		if(xOffset==0 && yOffset==0) {
 			return false;
 		}
-		if(xOffset>1 || yOffset>1) {
+		if(yOffset>1) {
+			return false;
+		}
+		if(xOffset>1) {
 		    return this.roque(tabuleiro, x, y);
 		}
 		if(!tabuleiro[y][x].getVazio() && !Main.xeque(x,y)) {
@@ -68,8 +71,8 @@ public class Rei extends Objeto {
 			
 			for(i=this.getX()+1;tabuleiro[this.getY()][i].getPeca()==null;i++);
 			if(tabuleiro[this.getY()][i].getPeca().getNome().equals(nome + '2')) {
-				
 				tabuleiro[this.getY()][x+1].getPeca().setX(x-1);
+				tabuleiro[this.getY()][x+1].getPeca().setFlagMovimento(1);
 				tabuleiro[y][x-1].colocaPeca(tabuleiro[this.getY()][x+1].getPeca());
 				tabuleiro[this.getY()][x+1].tiraPeca();
 				
@@ -90,6 +93,7 @@ public class Rei extends Objeto {
 			if(tabuleiro[this.getY()][i].getPeca().getNome().equals(nome + '1')) {
 				
 				tabuleiro[this.getY()][x-2].getPeca().setX(x+1);
+				tabuleiro[this.getY()][x-2].getPeca().setFlagMovimento(1);
 				tabuleiro[y][x+1].colocaPeca(tabuleiro[this.getY()][x-2].getPeca());
 				tabuleiro[this.getY()][x-2].tiraPeca();
 				

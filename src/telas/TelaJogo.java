@@ -373,14 +373,6 @@ public class TelaJogo {
 		}
 		
 		Main.imprimeTabuleiro();
-		if(Main.xequeMate()) {
-			JOptionPane.showMessageDialog(null,"XAQUE-MATE","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
-			frame.setVisible(false);
-			TelaVitoria.main(null);
-		} else if(Main.xeque(-1,-1)) {
-			frame.setVisible(true);
-			JOptionPane.showMessageDialog(null,"Você esta em xeque!!","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
-		} 
 		
 		if(Main.getRever()==1) {
 			int j1 = Main.simula(0);
@@ -410,6 +402,15 @@ public class TelaJogo {
 			
 		} else {
 			
+			if(Main.xequeMate()) {
+				JOptionPane.showMessageDialog(null,"XAQUE-MATE","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
+				frame.setVisible(false);
+				TelaVitoria.main(null);
+			} else if(Main.xeque(-1,-1)) {
+				frame.setVisible(true);
+				JOptionPane.showMessageDialog(null,"Você esta em xeque!!","JOGO XASTREZ",JOptionPane.WARNING_MESSAGE);
+			}
+			
 			JPanel panel = new JPanel();
 			panel.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
@@ -429,18 +430,6 @@ public class TelaJogo {
 									break;
 								}
 							}
-							
-							for(int z=0;z<8;z++) {
-								for(int k=0;k<8;k++) {
-									if(Main.movimentosPossiveis(z, k)) {
-										JLabel l = new JLabel("");
-										l.setBounds( 80*z+80, 242+k*80, 80, 80);
-										l.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.green));
-										frame.getContentPane().add(l);
-									}
-								}
-							}
-							
 						}
 					} else {
 						if(Main.movimentoPeca(x, y)) {
