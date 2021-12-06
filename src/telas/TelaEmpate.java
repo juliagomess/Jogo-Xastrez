@@ -50,7 +50,7 @@ public class TelaEmpate {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnJogar = new JButton("Jogar");
+		JButton btnJogar = new JButton("Menu");
 		btnJogar.setBackground(SystemColor.menu);
 		btnJogar.setVerticalAlignment(SwingConstants.TOP);
 		btnJogar.setFont(new Font("Algerian", Font.PLAIN, 50));
@@ -59,7 +59,7 @@ public class TelaEmpate {
 		btnJogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				TelaInicial.main(null);
+				TelaZero.main(null);
 			}
 		});
 		

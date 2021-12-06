@@ -23,6 +23,7 @@ public class TelaJogo {
 	int flag=0;
 	private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 	JLabel atual;
+	int flagnext=0;
 
 	private JFrame frame;
 	ImageIcon f = new ImageIcon(getClass().getResource("../imagens/fundoJogo.png"));
@@ -115,6 +116,9 @@ public class TelaJogo {
 			});
 		} else {
 			JButton btnNext = new JButton("Próximo");
+			if(flagnext==1) {
+				btnNext.setText("Sair");
+			}
 			btnNext.setForeground(Color.BLACK);
 			btnNext.setBackground(SystemColor.menu);
 			btnNext.setFont(new Font("Algerian", Font.PLAIN, 16));
@@ -123,7 +127,12 @@ public class TelaJogo {
 			btnNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					frame.setVisible(false);
-					TelaJogo.main(null);
+					if(flagnext==0) {
+						TelaJogo.main(null);
+					} else {
+						JOptionPane.showMessageDialog(null,"Esse jogo acabou","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+						TelaZero.main(null);
+					}
 				}
 			});
 		}
@@ -375,30 +384,9 @@ public class TelaJogo {
 		Main.imprimeTabuleiro();
 		
 		if(Main.getRever()==1) {
-			int j1 = Main.simula(0);
-			if(j1==9) {
-				JOptionPane.showMessageDialog(null,"Esse jogo acabou","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
-				frame.setVisible(false);
+			if(!Main.simula()) {
+				flagnext=1;
 			}
-			
-			int i1 = Main.simula(1);
-			Main.setpecaAtual(j1,i1);
-			
-			for(JLabel p : labels) {
-				int j = (int) p.getLocation().getX()/80-1;
-				int i = (int) p.getLocation().getY()/80-3;
-				if(j==j1 && i==i1) {
-					atual=p;
-					atual.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, Color.red));
-					break;
-				}
-			}
-			
-			j1 = Main.simula(0);
-			i1 = Main.simula(1);
-			
-			Main.movimentoPeca(j1, i1);
-			atual.setBorder(null);
 			
 		} else {
 			

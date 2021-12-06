@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import pecas.Objeto;
 
 public class Main {
@@ -21,10 +24,19 @@ public class Main {
 		return rever;
 	}
 
-	public static void setRever(int jogo) throws FileNotFoundException {
-		rever = jogo;
-		setJogadores("Branco","Preto");
-		simulaJogo();
+	public static boolean setRever(int flag) throws FileNotFoundException {
+		if(flag==1) {
+			if(simulaJogo()) {
+				setJogadores("Branco","Preto");
+				rever=1;
+				return true;
+			}
+			return false;
+		} else {
+			rever=0;
+			return true;
+		}
+		
 	}
 	
 	public static void setpecaAtual(int x, int y) {
@@ -32,26 +44,30 @@ public class Main {
 	}
 	
 	public static void setJogadores(String nome1, String nome2) {
-		j1.setNome(nome1);
-		j2.setNome(nome2); 
+		Jogador jo1 = new Jogador(0); 
+		Jogador jo2 = new Jogador(1); 
+		jo1.setNome(nome1);
+		jo2.setNome(nome2); 
 		
 		for(int i=0;i<8;i++)
 			for(int j=0;j<8;j++)
 				tabuleiro[i][j]=new Lugar();
 			
 		for(int i=0;i<16;i++) {
-			Objeto peca=j1.getPecas().get(i);
+			Objeto peca=jo1.getPecas().get(i);
 			if(peca!=null) {
 				tabuleiro[peca.getY()][peca.getX()].colocaPeca(peca);
 			}
 		}
 		
 		for(int i=0;i<16;i++) {
-			Objeto peca=j2.getPecas().get(i);
+			Objeto peca=jo2.getPecas().get(i);
 			if(peca!=null) {
 				tabuleiro[peca.getY()][peca.getX()].colocaPeca(peca);
 			}
 		}
+		j1=jo1;
+		j2=jo2;
 		jogadorAtual=j1;
 	}
 	
@@ -103,6 +119,11 @@ public class Main {
 				return false;
 			}
 		} 
+//		if(pecaAtual.getNome().equals("rb") || pecaAtual.getNome().equals("rp")) {
+//			if(pecaAtual.movimento(tabuleiro, x, y,0) || Math.abs(pecaAtual.getX()-x)>1) {
+//				
+//			}
+//		}
 		if(pecaAtual.movimento(tabuleiro, x, y,0)) {
 			if(getRever()==0) {
 				registraMovimento(pecaAtual.getX(),pecaAtual.getY(),0);
@@ -312,30 +333,49 @@ public class Main {
 		writer.close();
 	}
 	
-	public static void simulaJogo() throws FileNotFoundException {
-		Scanner useDelimiter = new Scanner(new File("Jogo.txt"), "UTF-8").useDelimiter("\\A");
-		jogadas = useDelimiter.next();
-		System.out.print(jogadas);
-	}
-	
-	public static int simula(int flag) {
-		int x;
-		if(jogadas.length()==1) {
-			return 9;
-		}
-		if(jogadas.charAt(0)=='>' || jogadas.charAt(0)==' ') {
-			jogadas=jogadas.substring(1);
-		}
-		if(flag==0) {
-			x = jogadas.charAt(0) - 65; 
-		} else {
-			x = jogadas.charAt(0) - 48;
+	public static boolean simulaJogo() throws FileNotFoundException {
+		try {
+			@SuppressWarnings("resource")
+			Scanner useDelimiter = new Scanner(new File("Jogo.txt"), "UTF-8").useDelimiter("\\A");
+			jogadas = useDelimiter.next();
+			System.out.print(jogadas);
+			return true;
+		} catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"Nenhum jogo registrado","JOGO XASTREZ",JOptionPane.INFORMATION_MESSAGE);
+			return false;
 		}
 		
-		jogadas=jogadas.substring(1);
-		System.out.print("\n" +x + "\n");
-		System.out.print(jogadas);
-		return x;
+	}
+	
+	public static boolean simula() {
+		int x,y;
+		int toX,toY;
+		
+		if(jogadas.length()>1) {
+			while(true) {
+				if(jogadas.charAt(0)==' ') {
+					jogadas=jogadas.substring(1);
+					break;
+				}
+				if(jogadas.charAt(0)=='>') 
+					jogadas=jogadas.substring(1);
+				x = jogadas.charAt(0) - 65;
+				y = jogadas.charAt(1) - 48;
+				jogadas=jogadas.substring(2);
+				setpecaAtual(x,y);
+				if(jogadas.charAt(0)=='>') {
+					jogadas=jogadas.substring(1);
+					toX = jogadas.charAt(0) - 65;
+					toY = jogadas.charAt(1) - 48;
+					jogadas=jogadas.substring(2);
+					movimentoPeca(toX,toY);
+				}
+				System.out.print(jogadas);
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {

@@ -60,6 +60,12 @@ public class TelaZero {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				TelaInicial.main(null);
+				try {
+					Main.setRever(0);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -72,12 +78,14 @@ public class TelaZero {
 		btnRever.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Main.setRever(1);
+					if(Main.setRever(1)) {
+						frame.setVisible(false);
+						TelaJogo.main(null);
+					}
 				} catch (FileNotFoundException e1) {
-					System.out.print("AAAAAAAAAAA");
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				frame.setVisible(false);
-				TelaJogo.main(null);
 			}
 		});
 		
